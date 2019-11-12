@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductPrice from '../product-price';
-import './styles.css';
+import ProductPrice from '../ProductPrice/ProductPrice';
+import './product-card.css';
 
 class ProductCard extends Component {
   constructor(props) {
