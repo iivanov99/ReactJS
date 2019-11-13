@@ -1,12 +1,12 @@
 import React from 'react';
 import './PostAuthor.css';
 
-const PostAuthor = () => {
+const PostAuthor = ({ author }) => {
   return (
     <div>
       <span>
         <small>Author: </small>
-        Some Anonymous
+        {author}
       </span>
     </div>
   );
