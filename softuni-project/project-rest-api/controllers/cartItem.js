@@ -3,13 +3,17 @@ const models = require('../models');
 module.exports = {
   get: {
     all: async (req, res, next) => {
-      const cartItems = await models.CartItem.find({});
+      const cartItems = await models.CartItem
+        .find({})
+        .populate('creatorId');
       res.json(cartItems);
     },
     one: async (req, res, next) => {
       try {
         const { id } = req.params;
-        const cartItem = await models.CartItem.find({ _id: id });
+        const cartItem = await models.CartItem
+          .find({ _id: id })
+          .populate('creatorId');
         res.json(cartItem);
       } catch (err) {
         next(err);

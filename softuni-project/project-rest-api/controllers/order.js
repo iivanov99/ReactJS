@@ -3,13 +3,17 @@ const models = require('../models');
 module.exports = {
   get: {
     all: async (req, res, next) => {
-      const orders = await models.Order.find({});
+      const orders = await models.Order
+        .find({})
+        .populate('creatorId');
       res.json(orders);
     },
     one: async (req, res, next) => {
       try {
         const { id } = req.params;
-        const order = await models.Order.find({ _id: id });
+        const order = await models.Order
+          .find({ _id: id })
+          .populate('creatorId');
         res.json(order);
       } catch (err) {
         next(err);
