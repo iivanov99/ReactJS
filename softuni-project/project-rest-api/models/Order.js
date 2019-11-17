@@ -12,7 +12,7 @@ const orderSchema = new Schema({
   },
   status: {
     type: Schema.Types.String,
-    enum: ['Pending', 'Accepted', 'Declined'],
+    enum: ['Pending', 'Aproved', 'Declined'],
     required: [true, 'Order status is required!']
   },
   date: {
