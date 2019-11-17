@@ -1,0 +1,35 @@
+.carousel-item {
+  height: 700px;
+}
+
+button.btn {
+  color: #ec7f37;
+  border-color: #ec7f37;
+}
+
+button.btn-orange:hover {
+  background: #ec7f37;
+  color: black;
+  border-color: black;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  width: 6%;
+}
+
+.c-img {
+  position: relative;
+  top: -50%;
+}
+
+.curousel-heading {
+  margin-top: 15px;
+}
+
+.row {
+  margin: 0;
+}
+
+.carousel-row .col-md-12 {
+  padding: 0;
+}

@@ -1,0 +1,32 @@
+span.deep-orange-text {
+  color: #FF5A09;
+  font-weight: 400;
+}
+
+.row-silver {
+  background: silver;
+  padding-top: 45px;
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.underline {
+  font-weight: 900;
+  position: relative;
+  z-index: 2;
+}
+
+.underline:after {
+  display: block;
+  width: 100%;
+  content: '';
+  background: #ec7f37;
+  position: absolute;
+  height: 10px;
+  left: 0;
+  bottom: 10px;
+  z-index: -1;
+}

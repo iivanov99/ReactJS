@@ -1,15 +1,14 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from '../ProductCard/ProductCard';
-import Header from '../Header/Header';
 import './product-list.css';
+import data from '../../data';
 
 const ProductList = ({ products }) => {
   return (
     <Fragment>
-      <Header />
       <div className="container">
-        {products.map((product, index) => <ProductCard key={index} {...product} />)}
+        {data.map((product, index) => <ProductCard key={index} {...product} />)}
       </div>
     </Fragment>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ProductList from './components/ProductList/ProductList';
-import data from './data';
+import App from './components/App/App';
 
-ReactDOM.render(<ProductList products={data} />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));

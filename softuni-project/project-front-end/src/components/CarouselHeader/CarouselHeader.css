@@ -1,0 +1,16 @@
+.row-absolute {
+  position: absolute;
+  z-index: 1;
+  color: white;
+  text-align: left;
+}
+
+.jumbotron {
+  background: none;
+  margin: 0;
+  padding-top: 100px;
+}
+
+.lead {
+  color: #ec7f37;
+}

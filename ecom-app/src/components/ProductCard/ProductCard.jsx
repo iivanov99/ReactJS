@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProductPrice from '../ProductPrice/ProductPrice';
 import './product-card.css';
@@ -31,7 +32,9 @@ class ProductCard extends Component {
 
     return (
       <div className="product-tile" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-        <img className="product-image" src={image} alt={title} />
+        <Link to="/product">
+          <img className="product-image" src={image} alt={title} />
+        </Link>
         <div>
           <span className="product-brand">{brand}</span>
           <span className="product-title">{title}</span>

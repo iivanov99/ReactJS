@@ -1,0 +1,53 @@
+.card {
+  overflow: hidden;
+  border-radius: 20px;
+  border-style: none;
+}
+
+.card-body {
+  text-align: left;
+  padding: 28px;
+}
+
+.card-img {
+  height: 225px;
+  width: 225px;
+  border-radius: 0;
+}
+
+.card-title {
+  margin: 12px 0;
+}
+
+.card-col {
+  padding: 0 40px;
+  padding-bottom: 70px;
+}
+
+.card-btn {
+  background: #ec7f37;
+  color: white;
+  border-style: none;
+}
+
+.span-price {
+  color: #ec7f37;
+  font-weight: 900;
+  font-size: 32px;
+}
+
+.card-buttons {
+  text-align: right;
+}
+
+.card-info {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accessories-img {
+  height: 335px;
+  width: 390px;
+}
