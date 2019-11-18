@@ -28,11 +28,11 @@ class ProductCard extends Component {
   }
 
   render() {
-    const { image, title, brand, price } = this.props;
+    const { image, title, brand, price, id } = this.props;
 
     return (
       <div className="product-tile" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
-        <Link to="/product">
+        <Link to={`/product/${id}`}>
           <img className="product-image" src={image} alt={title} />
         </Link>
         <div>
