@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Link from '../Link/Link';
 import logo from '../../images/white-origami-bird.png';
+
 import './Navigation.css';
 
 const Navigation = () => {
