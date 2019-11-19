@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Post from '../Post/Post';
-import './Posts.css';
-import postService from '../../services/post-service';
+import postService from '../../../services/post-service';
+import './AllPosts.css';
 
 class Posts extends Component {
   constructor(props) {
@@ -12,10 +12,9 @@ class Posts extends Component {
   }
 
   async componentDidMount() {
-    const posts = await postService.load();
-    const topFivePosts = posts.slice(0, 5);
+    const posts = await postService.load(this.props.limit);
     this.setState({
-      posts: topFivePosts
+      posts
     });
   }
 
@@ -33,7 +32,7 @@ class Posts extends Component {
     return (
       <div className="Posts">
         {posts.map(post => (
-          <Post key={post.id} author={post.title}>{post.body}</Post>
+          <Post key={post.id} author={post.author.username}>{post.description}</Post>
         ))}
       </div>
     );

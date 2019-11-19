@@ -1,0 +1,44 @@
+.Input {
+  display: inline-block;
+  padding: 0.5%;
+  width: 83%;
+}
+
+.Input h2 {
+  color: #234456;
+  text-decoration: underline;
+}
+
+textarea {
+  width: 40%;
+  display: block;
+  margin: 0 auto;
+  resize: none;
+  padding: 2%;
+  height: 10vh;
+  font-style: italic;
+  border-radius: 6px;
+  border: 1px solid #234456;
+  color: #234456;
+}
+
+button {
+  background-color: #234456;
+  color: white;
+  padding: 1%;
+  width: 7%;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  margin-top: 0.5%;
+  border: 2px solid white;
+  margin-bottom: 2%;
+}
+
+button:hover {
+  background-color: white;
+  color: #234456;
+  border: 2px solid #234456;
+  font-style: italic;
+}

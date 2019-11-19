@@ -6,11 +6,11 @@ const Aside = () => {
   return (
     <aside className="Aside">
       <ul>
-        <Link url="#">Going to 1</Link>
-        <Link url="#">Going to 2</Link>
-        <Link url="#">Going to 3</Link>
-        <Link url="#">Going to 4</Link>
-        <Link url="#">Going to 5</Link>
+        <Link url="/">Posts</Link>
+        <Link url="/posts/create">Create Post</Link>
+        <Link url="/user/register">Register</Link>
+        <Link url="/user/login">Login</Link>
+        <Link url="/user/profile">Profile</Link>
         <Link url="#">Going to 6</Link>
         <Link url="#">Going to 7</Link>
         <Link url="#">Going to 8</Link>

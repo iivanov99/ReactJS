@@ -1,6 +1,7 @@
 const postService = {
-  load: async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  load: async (limit) => {
+    const url = limit ? `http://localhost:9999/api/origami?limit=${limit}` : 'http://localhost:9999/api/origami';
+    const res = await fetch(url);
     return res.json();
   }
 };

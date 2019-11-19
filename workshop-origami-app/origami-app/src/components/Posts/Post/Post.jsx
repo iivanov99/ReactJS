@@ -1,6 +1,6 @@
 import React from 'react';
-import PostAuthor from '../PostAuthor/PostAuthor';
-import image from '../../images/blue-origami-bird.png'
+import PostAuthor from '../PostAuthor/PostAuthor'
+import image from '../../../images/blue-origami-bird.png'
 import './Post.css';
 
 const Post = ({ children, author }) => {

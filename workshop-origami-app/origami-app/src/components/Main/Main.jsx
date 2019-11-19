@@ -1,11 +1,11 @@
 import React from 'react';
-import Posts from '../Posts/Posts';
+import Posts from '../Posts/AllPosts/AllPosts';
 import './Main.css';
 
 const Main = () => {
   return (
     <main className="Main">
-      <h1>Sooooooooooome heading</h1>
+      <h1>Posts</h1>
       <Posts />
     </main>
   );

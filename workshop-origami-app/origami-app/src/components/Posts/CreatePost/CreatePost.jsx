@@ -1,8 +1,8 @@
 import React from 'react';
-import Post from '../Post/Post';
-import './ThoughtsSection.css';
+import AllPosts from '../../Posts/AllPosts/AllPosts';
+import './CreatePost.css';
 
-const ThoughtsSection = () => {
+const CreatePost = () => {
   return (
     <div className="Input">
       <div>
@@ -12,10 +12,10 @@ const ThoughtsSection = () => {
       </div>
       <div>
         <h2>Last 3 post on your wall</h2>
-        <Post author="Ivko">asdasdasdasd</Post>
+        <AllPosts limit={3}/>
       </div>
     </div>
   );
 };
 
-export default ThoughtsSection;
+export default CreatePost;
