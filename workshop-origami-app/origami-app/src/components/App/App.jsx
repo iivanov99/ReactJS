@@ -9,6 +9,7 @@ import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
+import PageNotFound from '../PageNotFount/PageNotFound';
 
 import './App.css';
 
@@ -23,8 +24,9 @@ const App = () => {
             <Route path="/" exact component={Main} />
             <Route path="/posts/create" component={CreatePost} />
             <Route path="/user/register" component={Register} />
-            <Route path="/user/login" component={Login}/>
-            <Route path="/user/profile" component={Profile}/>
+            <Route path="/user/login" component={Login} />
+            <Route path="/user/profile" component={Profile} />
+            <Route component={PageNotFound} />
           </Switch>
         </div>
         <Footer />
