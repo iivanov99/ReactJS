@@ -7,15 +7,10 @@ const ProductCard = ({ name, imageUrl, description, price }) => {
     <Fragment>
       <div className="col-md-3 card-col">
         <Card>
-          <Card.Img
-            variant="top"
-            src={imageUrl}
-          />
+          <Card.Img variant="top" src={imageUrl} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>
-              {description}
-            </Card.Text>
+            <Card.Text>{description}</Card.Text>
             <div className="card-info">
               <p>Price: <br></br> <span className="span-price">${price}</span></p>
               <div className="card-buttons">

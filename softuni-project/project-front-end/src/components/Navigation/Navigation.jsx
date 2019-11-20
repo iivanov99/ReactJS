@@ -1,8 +1,9 @@
 import React, { Fragment, Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
-import './Header.css';
+import './Navigation.css';
 
-class Header extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,11 +20,11 @@ class Header extends Component {
       return (
         <Fragment>
           <Navbar className="navbar-dark" variant="dark">
-            <Navbar.Brand href="#home">Forever<span className="deep-orange-text">Lean</span></Navbar.Brand>
+            <Link className="navbar-brand" to="/">Forever<span className="deep-orange-text">Lean</span></Link>
             <Nav className="mr-auto nav-center">
-              <Nav.Link href="#">Men</Nav.Link>
-              <Nav.Link href="#">Women</Nav.Link>
-              <Nav.Link href="#">Accessories</Nav.Link>
+              <Link className="nav-link" to="/apparel/men">Men</Link>
+              <Link className="nav-link" to="/apparel/women">Women</Link>
+              <Link className="nav-link" to="/apparel/accessories">Accessories</Link>
             </Nav>
             <Nav>
               <Nav.Link href="#home">Login</Nav.Link>
@@ -80,4 +81,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default Navigation;

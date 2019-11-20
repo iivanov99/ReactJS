@@ -1,8 +1,8 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import './CarouselHeader.css';
+import './CarouselJumbotron.css';
 
-const CarouselHeader = () => {
+const CarouselJumbotron = () => {
   return (
     <div className="row row-absolute">
       <div className="col-sm-7 offset-1">
@@ -20,4 +20,4 @@ const CarouselHeader = () => {
   );
 };
 
-export default CarouselHeader;
+export default CarouselJumbotron;

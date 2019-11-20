@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { Carousel } from 'react-bootstrap';
-import CarouselHeader from '../CarouselHeader/CarouselHeader';
-import carouselImg1 from '../../images/car-img-1.jpg';
-import carouselImg2 from '../../images/car-img-2.jpg';
-import carouselImg3 from '../../images/car-img-3.jpg';
-import './SiteCarousel.css';
+import CarouselJumbotron from '../CarouselJumbotron/CarouselJumbotron';
+import carouselImg1 from '../../../images/car-img-1.jpg';
+import carouselImg2 from '../../../images/car-img-2.jpg';
+import carouselImg3 from '../../../images/car-img-3.jpg';
+import './CarouselSection.css';
 
-const SiteCarousel = () => {
+const CarouselSection = () => {
   return (
     <Fragment>
-      <CarouselHeader />
+      <CarouselJumbotron />
       <div className="row carousel-row">
         <div className="col-md-12">
           <Carousel indicators={false}>
@@ -45,4 +45,4 @@ const SiteCarousel = () => {
   )
 };
 
-export default SiteCarousel;
+export default CarouselSection;
