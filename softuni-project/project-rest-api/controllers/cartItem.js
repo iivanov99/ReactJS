@@ -5,7 +5,7 @@ module.exports = {
     all: async (req, res, next) => {
       const cartItems = await models.CartItem
         .find({})
-        .populate('creatorId');
+        .populate('creator', 'username');
       res.json(cartItems);
     },
     one: async (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports = {
         const { id } = req.params;
         const cartItem = await models.CartItem
           .find({ _id: id })
-          .populate('creatorId');
+          .populate('creator', 'username');
         res.json(cartItem);
       } catch (err) {
         next(err);
@@ -24,7 +24,7 @@ module.exports = {
     try {
       const { user } = req;
       const { name, price } = req.body;
-      const createdCartItem = await models.CartItem.create({ name, price, creatorId: user._id });
+      const createdCartItem = await models.CartItem.create({ name, price, creator: user._id });
       await models.User.updateOne({ _id: user._id }, { $push: { cartItems: createdCartItem._id } });
       res.json(createdCartItem);
     } catch (err) {

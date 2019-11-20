@@ -19,7 +19,7 @@ const orderSchema = new Schema({
     type: Schema.Types.Date,
     default: new Date().toLocaleString()
   },
-  creatorId: {
+  creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Creator id is required!']
