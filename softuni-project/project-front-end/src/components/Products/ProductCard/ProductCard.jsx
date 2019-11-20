@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import './ProductCard.css';
 
-const ProductCard = ({ name, imageUrl, description, price }) => {
+const ProductCard = ({ apparelType, id, name, imageUrl, description, price }) => {
   return (
     <Fragment>
       <div className="col-md-3 card-col">
-        <Card>
-          <Card.Img variant="top" src={imageUrl} />
+        <Card className="content-loaded">
+          <Link to={`/apparel/${apparelType}/${id}`}><Card.Img variant="top" src={imageUrl} /></Link>
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>{description}</Card.Text>

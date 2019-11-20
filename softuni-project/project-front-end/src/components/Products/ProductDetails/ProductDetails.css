@@ -1,0 +1,16 @@
+.row-details {
+  padding-bottom: 120px;
+}
+
+.product-heading {
+  margin-bottom: 20px;
+}
+
+.bolder-text {
+  font-weight: 550
+}
+
+.img-details {
+  border-radius: 10px;
+  border-style: none;
+}

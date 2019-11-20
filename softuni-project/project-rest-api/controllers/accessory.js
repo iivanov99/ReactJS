@@ -13,7 +13,7 @@ module.exports = {
     one: async (req, res, next) => {
       try {
         const { id } = req.params;
-        const accessory = await models.Accessory.find({ _id: id });
+        const accessory = await models.Accessory.findOne({ _id: id });
         res.json(accessory);
       } catch (err) {
         next(err);

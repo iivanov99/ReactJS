@@ -1,24 +1,26 @@
 import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 
-const ProductList = ({ apparel }) => {
+const ProductList = ({ apparel, apparelType }) => {
   return (
     <div className="row row-silver">
       {
         apparel.length ?
           (
-            apparel.map(({ name, description, imageUrl, price }) => (
+            apparel.map(({ _id, name, description, imageUrl, price }) => (
               <ProductCard
-                key={name}
+                key={_id}
+                id={_id}
                 name={name}
                 description={description}
                 imageUrl={imageUrl}
                 price={price}
+                apparelType={apparelType}
               />
             ))
           ) :
           (
-            <p>Loading...</p>
+            <div className="loading-div"></div>
           )
       }
     </div>

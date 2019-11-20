@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ApparelSection from '../ApparelSection/ApparelSection';
-import womenApparel from '../../../womenApparel';
+import apparelService from '../../../services/apparel-service';
 
 class WomenApparel extends Component {
   constructor(props) {
@@ -10,16 +10,24 @@ class WomenApparel extends Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({ womenApparel });
+  async componentDidMount() {
+    this.setState({
+      womenApparel: await apparelService.loadAll('women')
+    });
   }
 
   render() {
     const { womenApparel } = this.state;
 
+    if (!this.state.womenApparel.length) {
+      return (
+        <div className="loading-div"></div>
+      );
+    }
+
     return (
       <Fragment>
-        <ApparelSection sectionName="Women" apparel={womenApparel} />
+        <ApparelSection sectionName="Women" apparel={womenApparel} apparelType="women" />
       </Fragment>
     )
   }

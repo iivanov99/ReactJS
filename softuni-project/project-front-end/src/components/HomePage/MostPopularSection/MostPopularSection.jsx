@@ -1,11 +1,7 @@
 import React, { Fragment, Component } from 'react';
-
 import ApparelHeading from '../ApparelHeading/ApparelHeading';
 import ProductList from '../../Products/ProductList/ProductList';
-
-import menApparel from '../../../menApparel'
-// import womenApparel from '../../../womenApparel';
-import accessories from '../../../accessories';
+import apparelService from '../../../services/apparel-service';
 
 class MostPopularSection extends Component {
   constructor(props) {
@@ -18,13 +14,10 @@ class MostPopularSection extends Component {
   }
 
   async componentDidMount() {
-    const res = await fetch('http://localhost:8080/api/apparel/women');
-    const womenApparel = await res.json();
-    
     this.setState({
-      menApparel,
-      womenApparel,
-      accessories
+      menApparel: await apparelService.loadAll('men', 4),
+      womenApparel: await apparelService.loadAll('women', 4),
+      accessories: await apparelService.loadAll('accessories', 4)
     });
   }
 
@@ -40,13 +33,13 @@ class MostPopularSection extends Component {
         </div>
 
         <ApparelHeading name="Men Apparel" />
-        <ProductList apparel={menApparel} />
+        <ProductList apparel={menApparel} apparelType="men"/>
 
         <ApparelHeading name="Women Apparel" />
-        <ProductList apparel={womenApparel} />
+        <ProductList apparel={womenApparel} apparelType="women"/>
 
         <ApparelHeading name="Accessories" />
-        <ProductList apparel={accessories} />
+        <ProductList apparel={accessories} apparelType="accessories"/>
       </Fragment>
     );
   }

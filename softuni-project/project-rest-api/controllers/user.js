@@ -12,7 +12,7 @@ module.exports = {
       try {
         const { id } = req.params;
         const user = await models.User
-          .find({ _id: id })
+          .findOne({ _id: id })
           .populate('orders')
           .populate('cartItems');
         res.json(user);

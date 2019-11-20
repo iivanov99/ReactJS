@@ -12,7 +12,7 @@ module.exports = {
       try {
         const { id } = req.params;
         const order = await models.Order
-          .find({ _id: id })
+          .findOne({ _id: id })
           .populate('creator', 'username');
         res.json(order);
       } catch (err) {

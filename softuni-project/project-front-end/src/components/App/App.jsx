@@ -9,6 +9,7 @@ import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
 
 import './App.css';
+import ProductDetails from '../Products/ProductDetails/ProductDetails';
 
 function App() {
   return (
@@ -17,8 +18,14 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/" exact component={HomePage} />
+          
+          <Route path="/apparel/men/:id" component={ProductDetails} />
           <Route path="/apparel/men" component={MenApparel} />
+
+          <Route path="/apparel/women/:id" component={ProductDetails} />
           <Route path="/apparel/women" component={WomenApparel} />
+
+          <Route path="/apparel/accessories/:id" component={ProductDetails} />
           <Route path="/apparel/accessories" component={Accessories} />
         </Switch>
         <Footer />

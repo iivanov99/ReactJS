@@ -6,3 +6,22 @@
   padding: 0;
   margin: 0;
 }
+
+.loading-div {
+  height: 100vh;
+  background-color: silver;
+}
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.content-loaded {
+  animation-name: load;
+  animation-duration: 1.3s;
+}
