@@ -17,14 +17,6 @@ const userSchema = new Schema({
     required: [true, 'Email is required!'],
     unique: true
   },
-  firstName: {
-    type: Schema.Types.String,
-    required: [true, 'First name is required!'],
-  },
-  lastName: {
-    type: Schema.Types.String,
-    required: [true, 'Last name is required!'],
-  },
   orders: [{
     type: Schema.Types.ObjectId,
     ref: 'Order'
@@ -33,10 +25,6 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'CartItem'
   }],
-  currentCash: {
-    type: Schema.Types.Number,
-    default: 0
-  },
   role: {
     type: Schema.Types.String,
     enum: ['admin', 'user'],

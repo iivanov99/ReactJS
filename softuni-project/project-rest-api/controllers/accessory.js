@@ -3,7 +3,11 @@ const models = require('../models');
 module.exports = {
   get: {
     all: async (req, res) => {
-      const accessories = await models.Accessory.find({});
+      const { limit } = req.query;
+      let accessories = limit
+        ? await models.Accessory.find({}).sort({ ordersCount: -1 }).limit(parseInt(limit))
+        : await models.Accessory.find({});
+
       res.json(accessories);
     },
     one: async (req, res, next) => {

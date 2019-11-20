@@ -11,7 +11,10 @@ module.exports = {
     one: async (req, res, next) => {
       try {
         const { id } = req.params;
-        const user = await models.User.find({ _id: id }).populate('orders').populate('cartItems');
+        const user = await models.User
+          .find({ _id: id })
+          .populate('orders')
+          .populate('cartItems');
         res.json(user);
       } catch (err) {
         next(err);
@@ -21,14 +24,14 @@ module.exports = {
   post: {
     register: async (req, res, next) => {
       try {
-        const { username, email, password, rePassword, firstName, lastName } = req.body;
+        const { username, email, password, rePassword } = req.body;
 
         if (password !== rePassword) {
           res.status(406).send({ msg: 'Both passwords must match!' });
           return;
         }
 
-        const createdUser = await models.User.create({ username, email, password, firstName, lastName });
+        const createdUser = await models.User.create({ username, email, password });
         res.json(createdUser);
       } catch (err) {
         next(err);
@@ -63,8 +66,8 @@ module.exports = {
   put: async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { username, password, currentCash } = req.body;
-      const updatedUser = await models.User.updateOne({ _id: id }, { username, password, currentCash });
+      const { username, password } = req.body;
+      const updatedUser = await models.User.updateOne({ _id: id }, { username, password });
       res.json(updatedUser);
     } catch (err) {
       next(err);
