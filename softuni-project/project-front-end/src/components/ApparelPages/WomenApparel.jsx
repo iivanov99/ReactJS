@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import ApparelSection from '../ApparelSection/ApparelSection';
-import apparelService from '../../../services/apparel-service';
+import ApparelSection from './ApparelSection/ApparelSection';
+import apparelService from '../../services/apparel-service';
 
 class WomenApparel extends Component {
   constructor(props) {

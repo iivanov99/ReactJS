@@ -1,0 +1,13 @@
+.cart-input {
+  border-radius: 5px;
+  border-style: solid;
+  border-color: grey;
+  border-width: 1px;
+  text-align: center;
+  width: 70px;
+  background: transparent;
+}
+
+.table td {
+  border-top: 1px solid grey;
+}

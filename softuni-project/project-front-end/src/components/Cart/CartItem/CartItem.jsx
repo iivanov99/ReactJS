@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import './CartItem.css';
 
 class CartItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      previousQuantity: 1,
       quantity: 1,
       total: props.price
     };
@@ -16,7 +16,7 @@ class CartItem extends Component {
       quantity: parseInt(ev.target.value)
     }, () => {
       this.setState({
-        total: Number(this.props.price) * Number(this.state.quantity)
+        total: parseFloat(this.props.price) * parseInt(this.state.quantity)
       })
     });
   }
@@ -31,11 +31,8 @@ class CartItem extends Component {
         <td>$ {price}</td>
         <td>
           <input
-            onChange={this.handleInputChange}
-            class="cart-input"
-            type="number"
-            min="1"
-            value={quantity} />
+            className="cart-input" onChange={this.handleInputChange}
+            type="number" min="1" value={quantity} />
         </td>
         <td>$ {total}</td>
       </tr>

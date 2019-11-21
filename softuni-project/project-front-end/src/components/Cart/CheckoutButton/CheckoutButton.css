@@ -1,0 +1,16 @@
+.checkout-row {
+  padding-top: 0;
+  min-height: calc(100vh - 610px);
+}
+
+.checkout-col {
+  text-align: right;
+}
+
+.checkout-btn {
+  color: white;
+  background: #ec7f37;
+  padding: 15px 50px;
+  font-size: 20px;
+  margin-right: 205px;
+}
