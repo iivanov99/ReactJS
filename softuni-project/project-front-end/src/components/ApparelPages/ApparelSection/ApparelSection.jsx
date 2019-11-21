@@ -32,12 +32,7 @@ class ApparelSection extends Component {
         <div className="row row-silver">
           <ApparelSectionHeading name={sectionName} />
           <div className="col-md-6 col-search">
-            <input
-              onChange={this.handleInputChange}
-              className="apparel-search"
-              type="search"
-              placeholder="Search..."
-              value={searchValue} />
+            <input className="apparel-search" onChange={this.handleInputChange} type="search" placeholder="Search..." value={searchValue} />
           </div>
         </div>
         <ProductList apparel={apparelToDisplay} apparelType={apparelType} />

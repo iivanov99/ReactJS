@@ -19,15 +19,13 @@ class Accessories extends Component {
   render() {
     const { accessories } = this.state;
 
-    if (!this.state.accessories.length) {
-      return (
-        <div className="loading-div"></div>
-      );
-    }
-
     return (
       <Fragment>
-        <ApparelSection sectionName="Accessories" apparel={accessories} apparelType="accessories" />
+        {this.state.accessories.length ? (
+          <ApparelSection sectionName="Accessories" apparel={accessories} apparelType="accessories" />
+        ) : (
+          <div className="loading-div"></div>
+        )}
       </Fragment>
     )
   }
