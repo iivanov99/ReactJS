@@ -14,12 +14,10 @@ class ApparelSection extends Component {
   }
 
   handleInputChange(ev) {
-    const filteredApparel = this.props.apparel.filter(a =>
-      a.name.toLowerCase().includes(ev.target.value.toLowerCase()));
-
     this.setState({
       searchValue: ev.target.value,
-      apparelToDisplay: filteredApparel
+      apparelToDisplay: this.props.apparel.filter(apparelItem =>
+        apparelItem.name.toLowerCase().includes(ev.target.value.toLowerCase()))
     });
   }
 
@@ -32,7 +30,8 @@ class ApparelSection extends Component {
         <div className="row row-silver">
           <ApparelSectionHeading name={sectionName} />
           <div className="col-md-6 col-search">
-            <input className="apparel-search" onChange={this.handleInputChange} type="search" placeholder="Search..." value={searchValue} />
+            <input className="apparel-search" onChange={this.handleInputChange}
+              type="search" placeholder="Search..." value={searchValue} />
           </div>
         </div>
         <ProductList apparel={apparelToDisplay} apparelType={apparelType} />
