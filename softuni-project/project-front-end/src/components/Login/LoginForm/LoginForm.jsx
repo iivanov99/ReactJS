@@ -11,7 +11,7 @@ class LoginForm extends Component {
       password: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleInputChange(ev) {
@@ -20,13 +20,11 @@ class LoginForm extends Component {
     });
   }
 
-  handleSubmit(ev) {
+  handleFormSubmit(ev) {
     ev.preventDefault();
 
-    const { email, password } = this.state;
-
-    const emailValidationErrors = this.getEmailValidation(email);
-    const passwordValidationErrors = this.getPasswordValidation(password);
+    const emailValidationErrors = this.getEmailValidation();
+    const passwordValidationErrors = this.getPasswordValidation();
 
     if (!emailValidationErrors.length && !passwordValidationErrors.length) {
       this.props.history.push('/');
@@ -37,12 +35,13 @@ class LoginForm extends Component {
     this.displayValidationErrors(emailValidationErrors.concat(passwordValidationErrors));
   }
 
-  getEmailValidation(email) {
+  getEmailValidation() {
+    const { email } = this.state;
     const validationErrors = [];
 
     if (!email) {
       validationErrors.push('Email is required!');
-    } else if (!email.includes('@')) {
+    } else if (!email.includes('@') || !email.includes('.')) {
       validationErrors.push('Invalid email!');
     } else if (email.length < 5) {
       validationErrors.push('Email must be atleast 5 symbols long!');
@@ -51,13 +50,14 @@ class LoginForm extends Component {
     return validationErrors;
   }
 
-  getPasswordValidation(password) {
+  getPasswordValidation() {
+    const { password } = this.state;
     const validationErrors = [];
 
     if (!password) {
       validationErrors.push('Password is required!');
     } else if (password.length < 6) {
-      validationErrors.push('Password must be atleast 6 symbols!');
+      validationErrors.push('Password must be atleast 6 symbols long!');
     }
 
     return validationErrors;
@@ -73,7 +73,7 @@ class LoginForm extends Component {
     return (
       <div className="row row-dark-grey row-login">
         <div className="col-md-12">
-          <form onSubmit={this.handleSubmit} className="login-form">
+          <form onSubmit={this.handleFormSubmit} className="login-form">
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input onChange={this.handleInputChange} className="form-control" value={email}

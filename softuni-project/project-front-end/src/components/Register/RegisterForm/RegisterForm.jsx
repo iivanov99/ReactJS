@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './RegisterForm.css';
+import { toast } from 'react-toastify';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class RegisterForm extends Component {
       rePassword: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleInputChange(ev) {
@@ -19,13 +21,46 @@ class RegisterForm extends Component {
     });
   }
 
+  handleFormSubmit(ev) {
+    ev.preventDefault();
+
+    const passwordValidationErrors = this.getPasswordValidation();
+
+    if (!passwordValidationErrors.length) {
+      this.props.history.push('/user/login');
+      toast.success('Account created successfully!');
+      return;
+    }
+
+    this.displayValidationErrors(passwordValidationErrors);
+  }
+
+  getPasswordValidation() {
+    const { password, rePassword } = this.state;
+    const validationErrors = []
+
+    if (!password.length || !rePassword.length) {
+      validationErrors.push('Password fields are required!');
+    } else if (password !== rePassword) {
+      validationErrors.push('Both passwords must match!');
+    } else if (password.length < 6) {
+      validationErrors.push('Password must be atleast 6 symbols long!')
+    }
+
+    return validationErrors;
+  }
+
+  displayValidationErrors(validationErrors) {
+    validationErrors.forEach(err => toast.error(err));
+  }
+
   render() {
     const { email, username, password, rePassword } = this.state;
 
     return (
       <div className="row row-dark-grey row-register">
         <div className="col-md-12">
-          <form className="register-form">
+          <form onSubmit={this.handleFormSubmit} className="register-form">
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input onChange={this.handleInputChange} className="form-control" value={email}
