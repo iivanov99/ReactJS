@@ -14,12 +14,14 @@ const Login = () => {
         <div className="col-md-12">
           <form className="login-form">
             <div className="form-group">
-              <label htmlFor="emailInput">Email</label>
-              <input type="text" className="form-control" placeholder="Email" />
+              <label htmlFor="email">Email</label>
+              <input className="form-control" type="text" id="email"
+                placeholder="Email" required />
             </div>
             <div className="form-group">
-              <label htmlFor="passwordInput">Password</label>
-              <input type="password" className="form-control" placeholder="Password" />
+              <label htmlFor="password">Password</label>
+              <input className="form-control" type="password" id="password"
+                placeholder="Password" required />
             </div>
             <button type="submit" className="btn btn-primary form-btn">Login</button>
           </form>

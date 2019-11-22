@@ -12,7 +12,6 @@ import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
 
 import './App.css';
-import CartItems from '../Cart/CartItems/CartItems';
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
       <div className="container-fluid">
         <Navigation />
         <Switch>
-          <Route path="/" exact component={CartItems} />
+          <Route path="/" exact component={HomePage} />
 
           <Route path="/apparel/men/:id" component={ProductDetails} />
           <Route path="/apparel/men" component={MenApparel} />
