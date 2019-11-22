@@ -8,6 +8,12 @@ span.deep-orange-text {
   padding-top: 45px;
 }
 
+.row-dark-grey {
+  background: #262626;
+  color: white;
+  padding: 40px;
+}
+
 .row {
   margin-right: 0px;
   margin-left: 0px;
@@ -29,4 +35,19 @@ span.deep-orange-text {
   left: 0;
   bottom: 10px;
   z-index: -1;
+}
+
+.register-form button.form-btn,
+.login-form button.form-btn {
+  color: #0c0c0e;
+  border-color: #0c0c0e;
+  background: #ec7f37;
+  margin-top: 5px;
+}
+
+.register-form button.form-btn:hover,
+.login-form button.form-btn:hover {
+  color: #ec7f37;
+  border-color: #ec7f37;
+  background: #0c0c0e;
 }

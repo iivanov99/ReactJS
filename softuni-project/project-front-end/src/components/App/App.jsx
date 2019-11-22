@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Navigation from '../Navigation/Navigation';
 import MenApparel from '../ApparelPages/MenApparel';
@@ -11,7 +12,10 @@ import Register from '../Register/Register';
 import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+
+toast.configure();
 
 function App() {
   return (
