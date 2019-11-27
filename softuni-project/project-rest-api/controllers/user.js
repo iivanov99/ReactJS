@@ -39,12 +39,12 @@ module.exports = {
     },
     login: async (req, res, next) => {
       try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
-        const user = await models.User.findOne({ username });
+        const user = await models.User.findOne({ email });
 
         if (!user) {
-          res.status(401).send({ msg: 'Invalid username!' });
+          res.status(401).send({ msg: 'Invalid email!' });
           return;
         }
 

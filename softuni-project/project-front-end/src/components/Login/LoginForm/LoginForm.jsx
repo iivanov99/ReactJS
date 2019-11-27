@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
-
+import * as yup from 'yup';
 import './LoginForm.css';
 
 class LoginForm extends Component {
@@ -23,48 +23,7 @@ class LoginForm extends Component {
   handleFormSubmit(ev) {
     ev.preventDefault();
 
-    const emailValidationErrors = this.getEmailValidation();
-    const passwordValidationErrors = this.getPasswordValidation();
-
-    if (!emailValidationErrors.length && !passwordValidationErrors.length) {
-      this.props.history.push('/');
-      toast.success('Successfuly logged in!');
-      return
-    }
-
-    this.displayValidationErrors(emailValidationErrors.concat(passwordValidationErrors));
-  }
-
-  getEmailValidation() {
-    const { email } = this.state;
-    const validationErrors = [];
-
-    if (!email) {
-      validationErrors.push('Email is required!');
-    } else if (!email.includes('@') || !email.includes('.')) {
-      validationErrors.push('Invalid email!');
-    } else if (email.length < 5) {
-      validationErrors.push('Email must be atleast 5 symbols long!');
-    }
-
-    return validationErrors;
-  }
-
-  getPasswordValidation() {
-    const { password } = this.state;
-    const validationErrors = [];
-
-    if (!password) {
-      validationErrors.push('Password is required!');
-    } else if (password.length < 6) {
-      validationErrors.push('Password must be atleast 6 symbols long!');
-    }
-
-    return validationErrors;
-  }
-
-  displayValidationErrors(validationErrors) {
-    validationErrors.forEach(err => toast.error(err));
+   
   }
 
   render() {
