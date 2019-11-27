@@ -32,7 +32,7 @@ class Posts extends Component {
     return (
       <div className="Posts">
         {posts.map(post => (
-          <Post key={post.id} author={post.author.username}>{post.description}</Post>
+          <Post key={post._id} author={post.author.username}>{post.description}</Post>
         ))}
       </div>
     );
