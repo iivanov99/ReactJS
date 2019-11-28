@@ -1,9 +1,18 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import userService from '../../services/user-service';
 import './Navigation.css';
+import { toast } from 'react-toastify';
 
-const Navigation = ({ isLogged, isAdmin }) => {
+const Navigation = ({ isLogged, isAdmin, changeLoggedState }) => {
+  const handleLogoutClick = async () => {
+    await userService.logout();
+    changeLoggedState(false);
+    toast.dismiss();
+    toast.success('Logged out successfuly!');
+  };
+
   return (
     <Fragment>
       <Navbar className="navbar-dark" variant="dark">
@@ -29,7 +38,7 @@ const Navigation = ({ isLogged, isAdmin }) => {
           {!isLogged ? (<Link className="nav-link" to="/user/register">Register</Link>) : null}
 
           {isLogged ? (<Link className="nav-link" to="/user/profile">Profile</Link>) : null}
-          {isLogged ? (<Link className="nav-link" to="/user/logout">Logout</Link>) : null}
+          {isLogged ? (<Link onClick={handleLogoutClick} className="nav-link" to="">Logout</Link>) : null}
         </Nav>
       </Navbar>
     </Fragment>

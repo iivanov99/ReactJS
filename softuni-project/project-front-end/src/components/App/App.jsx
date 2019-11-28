@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -11,36 +11,68 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
+import UserOrders from '../UserOrders/UserOrders';
+import CartItems from '../Cart/CartItems/CartItems';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 toast.configure();
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="container-fluid">
-        <Navigation />
-        <Switch>
-          <Route path="/" exact component={HomePage} />
+const parseCookies = () => {
+  return document.cookie.split('; ').reduce((acc, cookie) => {
+    const [cookieName, cookieValue] = cookie.split('=');
+    acc[cookieName] = cookieValue;
+    return acc;
+  }, {});
+};
 
-          <Route path="/apparel/men/:id" component={ProductDetails} />
-          <Route path="/apparel/men" component={MenApparel} />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogged: !!parseCookies()['auth_token'],
+      isAdmin: false
+    }
+    this.changeLoggedState = this.changeLoggedState.bind(this);
+  }
 
-          <Route path="/apparel/women/:id" component={ProductDetails} />
-          <Route path="/apparel/women" component={WomenApparel} />
+  changeLoggedState(newState) {
+    this.setState({
+      isLogged: newState
+    });
+  }
 
-          <Route path="/apparel/accessories/:id" component={ProductDetails} />
-          <Route path="/apparel/accessories" component={Accessories} />
+  render() {
+    const { isLogged, isAdmin } = this.state;
 
-          <Route path="/user/login" component={Login} />
-          <Route path="/user/register" component={Register} />
-        </Switch>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
+    return (
+      <BrowserRouter>
+        <div className="container-fluid">
+          <Navigation isLogged={isLogged} isAdmin={isAdmin} changeLoggedState={this.changeLoggedState} />
+          <Switch>
+            <Route path="/" exact render={(props) => <HomePage {...props} isLogged={isLogged} />} />
+
+            <Route path="/apparel/men/:id" component={ProductDetails} />
+            <Route path="/apparel/men" component={MenApparel} />
+
+            <Route path="/apparel/women/:id" component={ProductDetails} />
+            <Route path="/apparel/women" component={WomenApparel} />
+
+            <Route path="/apparel/accessories/:id" component={ProductDetails} />
+            <Route path="/apparel/accessories" component={Accessories} />
+
+            <Route path="/user/login" render={(props) => <Login {...props} changeLoggedState={this.changeLoggedState} />} />
+            <Route path="/user/register" component={Register} />
+
+            <Route path="/user/orders" component={UserOrders} />
+            <Route path="/user/cart" component={CartItems} />
+          </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

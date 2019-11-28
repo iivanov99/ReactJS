@@ -9,7 +9,7 @@ import carouselImg3 from '../../../images/car-img-3.jpg';
 
 import './CarouselSection.css';
 
-const CarouselSection = () => {
+const CarouselSection = ({ isLogged }) => {
   return (
     <Fragment>
       <CarouselJumbotron />
@@ -22,10 +22,10 @@ const CarouselSection = () => {
                 src={carouselImg1}
                 alt="First slide"
               />
-              <div className="carousel-caption d-none d-md-block">
+              {!isLogged ? (<div className="carousel-caption d-none d-md-block">
                 <Link to="/user/register"><button type="button" className="btn btn-orange">Join Us</button></Link>
                 <h5 className="curousel-heading">Become a member of our awesome community!</h5>
-              </div>
+              </div>) : null}
             </Carousel.Item>
             <Carousel.Item>
               <img

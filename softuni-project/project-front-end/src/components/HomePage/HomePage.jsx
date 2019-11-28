@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import CarouselSection from './CarouselSection/CarouselSection';
 import MostPopularSection from './MostPopularSection/MostPopularSection';
 
-const HomePage = () => {
+const HomePage = ({ isLogged }) => {
   return (
     <Fragment>
-      <CarouselSection />
+      <CarouselSection isLogged={isLogged} />
       <MostPopularSection />
     </Fragment>
   );

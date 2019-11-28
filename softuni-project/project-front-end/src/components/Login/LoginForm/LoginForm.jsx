@@ -38,7 +38,7 @@ class LoginForm extends Component {
       await schema.validate(this.state, { abortEarly: false });
       await userService.login(this.state);
 
-      //TODO: change global isLogged state
+      this.props.changeLoggedState(true);
       this.props.history.push('/');
 
       toast.dismiss();
