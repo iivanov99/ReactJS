@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
-import './RegisterForm.css';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
+import userService from '../../../services/user-service';
+import './RegisterForm.css';
+
+const schema = yup.object().shape({
+  email: yup.string()
+    .required('Email is required!')
+    .email('Email is not valid!'),
+  username: yup.string()
+    .required('Username is required!')
+    .min(4, 'Username must be atleast 4 symbols!')
+    .max(12, 'Username must not exceed 12 symbols!'),
+  password: yup.string()
+    .required('Password is required!')
+    .min(4, 'Password must be atleast 4 symbols!')
+    .max(12, 'Password must not exceed 12 symbols!'),
+  rePassword: yup.string()
+    .oneOf([yup.ref('password'), null], 'Passwords don\'t match!')
+    .required('Repeat password is required!')
+});
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -21,38 +40,28 @@ class RegisterForm extends Component {
     });
   }
 
-  handleFormSubmit(ev) {
+  async handleFormSubmit(ev) {
     ev.preventDefault();
 
-    const passwordValidationErrors = this.getPasswordValidation();
+    try {
+      await schema.validate(this.state, { abortEarly: false });
+      await userService.register(this.state);
 
-    if (!passwordValidationErrors.length) {
       this.props.history.push('/user/login');
-      toast.success('Account created successfully!');
-      return;
+      toast.dismiss();
+      toast.success('Registered successfuly!');
+    } catch (err) {
+      toast.dismiss();
+
+      if (err.inner) {
+        err.inner.forEach(innerErr => toast.error(innerErr.message));
+        return;
+      }
+
+      toast.error(err.message);
     }
-
-    this.displayValidationErrors(passwordValidationErrors);
   }
 
-  getPasswordValidation() {
-    const { password, rePassword } = this.state;
-    const validationErrors = []
-
-    if (!password.length || !rePassword.length) {
-      validationErrors.push('Password fields are required!');
-    } else if (password !== rePassword) {
-      validationErrors.push('Both passwords must match!');
-    } else if (password.length < 6) {
-      validationErrors.push('Password must be atleast 6 symbols long!')
-    }
-
-    return validationErrors;
-  }
-
-  displayValidationErrors(validationErrors) {
-    validationErrors.forEach(err => toast.error(err));
-  }
 
   render() {
     const { email, username, password, rePassword } = this.state;

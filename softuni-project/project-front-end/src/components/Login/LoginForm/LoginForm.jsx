@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
+import userService from '../../../services/user-service';
 import './LoginForm.css';
+
+const schema = yup.object().shape({
+  email: yup.string()
+    .required('Email is required!')
+    .email('Email is not valid!'),
+  password: yup.string()
+    .required('Password is required!')
+    .min(4, 'Password must be atleast 4 symbols!')
+    .max(12, 'Password must not exceed 12 symbols!')
+});
 
 class LoginForm extends Component {
   constructor(props) {
@@ -20,10 +31,30 @@ class LoginForm extends Component {
     });
   }
 
-  handleFormSubmit(ev) {
+  async handleFormSubmit(ev) {
     ev.preventDefault();
 
-   
+    try {
+      await schema.validate(this.state, { abortEarly: false });
+      await userService.login(this.state);
+
+      //TODO: change global isLogged state
+      this.props.history.push('/');
+
+      toast.dismiss();
+      toast.success('Logged in successfuly!');
+    } catch (err) {
+      toast.dismiss();
+
+      if (err.inner) {
+        err.inner.forEach(innerErr => toast.error(innerErr.message));
+        return;
+      }
+
+      if (err.message === 'Unauthorized') {
+        toast.error('Invalid email or password!');
+      }
+    }
   }
 
   render() {
