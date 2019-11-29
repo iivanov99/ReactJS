@@ -1,43 +1,32 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, useState } from 'react';
 import ProductList from '../../Products/ProductList/ProductList';
 import ApparelSectionHeading from './ApparelSectionHeading';
 import './ApparelSection.css';
 
-class ApparelSection extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchValue: '',
-      apparelToDisplay: props.apparel
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+const ApparelSection = ({ sectionName, apparel, apparelType }) => {
 
-  handleInputChange(ev) {
-    this.setState({
-      searchValue: ev.target.value,
-      apparelToDisplay: this.props.apparel.filter(apparelItem =>
-        apparelItem.name.toLowerCase().includes(ev.target.value.toLowerCase()))
-    });
-  }
+  const [searchValue, setSearchValue] = useState('');
+  const [apparelToDisplay, setApparelToDisplay] = useState(apparel);
 
-  render() {
-    const { searchValue, apparelToDisplay } = this.state;
-    const { sectionName, apparelType } = this.props;
+  const handleSearchInputChange = (ev) => {
+    const searchedApparel = apparel.filter(apparelItem =>
+      apparelItem.name.toLowerCase().includes(ev.target.value.toLowerCase()))
+    setSearchValue(ev.target.value);
+    setApparelToDisplay(searchedApparel);
+  };
 
-    return (
-      <Fragment>
-        <div className="row row-silver">
-          <ApparelSectionHeading name={sectionName} />
-          <div className="col-md-6 col-search">
-            <input className="apparel-search" onChange={this.handleInputChange}
-              type="search" placeholder="Search..." value={searchValue} />
-          </div>
+  return (
+    <Fragment>
+      <div className="row row-silver">
+        <ApparelSectionHeading name={sectionName} />
+        <div className="col-md-6 col-search">
+          <input className="apparel-search" onChange={handleSearchInputChange}
+            type="search" placeholder="Search..." value={searchValue} />
         </div>
-        <ProductList apparel={apparelToDisplay} apparelType={apparelType} />
-      </Fragment>
-    );
-  }
-}
+      </div>
+      <ProductList apparel={apparelToDisplay} apparelType={apparelType} />
+    </Fragment>
+  );
+};
 
 export default ApparelSection;
