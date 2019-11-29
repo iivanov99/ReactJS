@@ -1,34 +1,28 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import ApparelSection from './ApparelSection/ApparelSection';
 import apparelService from '../../services/apparel-service';
 
-class Accessories extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      accessories: []
-    };
-  }
+const Accessories = () => {
 
-  async componentDidMount() {
-    this.setState({
-      accessories: await apparelService.loadAll('accessories')
-    });
-  }
+  const [accessories, setAccessories] = useState([]);
 
-  render() {
-    const { accessories } = this.state;
+  const fetchAccessories = async () => {
+    setAccessories(await apparelService.loadAll('accessories'));
+  };
 
-    return (
-      <Fragment>
-        {this.state.accessories.length ? (
-          <ApparelSection sectionName="Accessories" apparel={accessories} apparelType="accessories" />
-        ) : (
-          <div className="loading-div"></div>
-        )}
-      </Fragment>
-    )
-  }
-}
+  useEffect(() => {
+    fetchAccessories();
+  }, []);
+
+  return (
+    <Fragment>
+      {accessories.length ? (
+        <ApparelSection sectionName="Accessories" apparel={accessories} apparelType="accessories" />
+      ) : (
+        <div className="loading-div"></div>
+      )}
+    </Fragment>
+  );
+};
 
 export default Accessories;
