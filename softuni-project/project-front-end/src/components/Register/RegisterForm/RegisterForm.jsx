@@ -55,7 +55,7 @@ const RegisterForm = ({ history }) => {
         <form onSubmit={handleFormSubmit} className="register-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input onChange={(ev) => setEmail(ev.target.value)} value={email}
+            <input onChange={ev => setEmail(ev.target.value)} value={email}
               className="form-control" type="text" id="email" placeholder="Email" />
             <small id="emailHelp" className="form-text text-muted">
               We'll never share your email adress with anyone else.
@@ -63,17 +63,17 @@ const RegisterForm = ({ history }) => {
           </div>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <input onChange={(ev) => setUsername(ev.target.value)} value={username}
+            <input onChange={ev => setUsername(ev.target.value)} value={username}
               className="form-control" type="text" id="username" placeholder="Username" />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input onChange={(ev) => setPassword(ev.target.value)} value={password}
+            <input onChange={ev => setPassword(ev.target.value)} value={password}
               className="form-control" type="password" id="password" placeholder="Password" />
           </div>
           <div className="form-group">
             <label htmlFor="rePassword">Repeat Password</label>
-            <input onChange={(ev) => setRePassword(ev.target.value)} value={rePassword}
+            <input onChange={ev => setRePassword(ev.target.value)} value={rePassword}
               className="form-control" type="password" id="rePassword" placeholder="Password" />
           </div>
           <button type="submit" className="btn btn-primary form-btn">Register</button>
