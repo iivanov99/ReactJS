@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import userService from '../../../services/user-service';
