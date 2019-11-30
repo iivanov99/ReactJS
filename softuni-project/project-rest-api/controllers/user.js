@@ -54,7 +54,9 @@ module.exports = {
         }
 
         const accessToken = await utils.jwt.createToken({ id: user._id });
-        res.cookie(config.authCookieName, accessToken).send({ authToken: accessToken });
+        res
+          .cookie(config.authCookieName, accessToken)
+          .json({ _id: user._id, username: user.username, role: user.role });
       } catch (err) {
         next(err);
       }
