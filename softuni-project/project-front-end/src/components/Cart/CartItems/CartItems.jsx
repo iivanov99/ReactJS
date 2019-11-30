@@ -9,15 +9,15 @@ import './CartItems.css';
 const Cart = () => {
   return (
     <Fragment>
-      <div class="row row-silver">
-        <div class="col-md-12">
-          <h1 class="cart-heading"><span class="underline">Cart</span></h1>
+      <div className="row row-silver">
+        <div className="col-md-12">
+          <h1 className="cart-heading"><span className="underline">Cart</span></h1>
         </div>
       </div>
 
-      <div class="row row-silver row-cart">
-        <div class="col-md-12">
-          <table class="table">
+      <div className="row row-silver row-cart">
+        <div className="col-md-12">
+          <table className="table">
             <CartHead />
             <tbody>
               <CartItem item="Whey Protein" price="100" />

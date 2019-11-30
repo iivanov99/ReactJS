@@ -1,43 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CartItem.css';
 
-class CartItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quantity: 1,
-      total: props.price
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
+const CartItem = ({ item, price }) => {
 
-  handleInputChange(ev) {
-    this.setState({
-      quantity: parseInt(ev.target.value)
-    }, () => {
-      this.setState({
-        total: parseFloat(this.props.price) * parseInt(this.state.quantity)
-      })
-    });
-  }
+  const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(price);
 
-  render() {
-    const { item, price } = this.props;
-    const { quantity, total } = this.state;
+  useEffect(() => {
+    setTotal(quantity * price);
+  }, [quantity, price]);
 
-    return (
-      <tr>
-        <td>{item}</td>
-        <td>$ {price}</td>
-        <td>
-          <input
-            className="cart-input" onChange={this.handleInputChange}
-            type="number" min="1" value={quantity} />
-        </td>
-        <td>$ {total}</td>
-      </tr>
-    );
-  }
-}
+  return (
+    <tr>
+      <td>{item}</td>
+      <td>$ {price}</td>
+      <td>
+        <input
+          onChange={ev => setQuantity(ev.target.value)} value={quantity}
+          className="cart-input" type="number" min="1" max="10" />
+      </td>
+      <td>$ {total}</td>
+    </tr>
+  );
+};
 
 export default CartItem;

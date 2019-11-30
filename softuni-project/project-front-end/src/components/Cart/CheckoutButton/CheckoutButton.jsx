@@ -3,9 +3,9 @@ import './CheckoutButton.css';
 
 const CheckoutButton = () => {
   return (
-    <div class="row row-silver checkout-row">
-      <div class="col-md-12 checkout-col">
-        <a href="#checkout" class="btn checkout-btn">Checkout</a>
+    <div className="row row-silver checkout-row">
+      <div className="col-md-12 checkout-col">
+        <a href="#checkout" className="btn checkout-btn">Checkout</a>
       </div>
     </div>
   );
