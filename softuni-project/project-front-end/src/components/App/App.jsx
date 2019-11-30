@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -27,52 +27,37 @@ const parseCookies = () => {
   }, {});
 };
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogged: !!parseCookies()['auth_token'],
-      isAdmin: false
-    }
-    this.changeLoggedState = this.changeLoggedState.bind(this);
-  }
+const App = () => {
 
-  changeLoggedState(newState) {
-    this.setState({
-      isLogged: newState
-    });
-  }
+  const [isLogged, setIsLogged] = useState(!!parseCookies()['auth_token']);
+  const [isAdmin] = useState(false);
 
-  render() {
-    const { isLogged, isAdmin } = this.state;
+  return (
+    <BrowserRouter>
+      <div className="container-fluid">
+        <Navigation isLogged={isLogged} isAdmin={isAdmin} changeLoggedState={setIsLogged} />
+        <Switch>
+          <Route path="/" exact render={(props) => <HomePage {...props} isLogged={isLogged} />} />
 
-    return (
-      <BrowserRouter>
-        <div className="container-fluid">
-          <Navigation isLogged={isLogged} isAdmin={isAdmin} changeLoggedState={this.changeLoggedState} />
-          <Switch>
-            <Route path="/" exact render={(props) => <HomePage {...props} isLogged={isLogged} />} />
+          <Route path="/apparel/men/:id" component={ProductDetails} />
+          <Route path="/apparel/men" component={MenApparel} />
 
-            <Route path="/apparel/men/:id" component={ProductDetails} />
-            <Route path="/apparel/men" component={MenApparel} />
+          <Route path="/apparel/women/:id" component={ProductDetails} />
+          <Route path="/apparel/women" component={WomenApparel} />
 
-            <Route path="/apparel/women/:id" component={ProductDetails} />
-            <Route path="/apparel/women" component={WomenApparel} />
+          <Route path="/apparel/accessories/:id" component={ProductDetails} />
+          <Route path="/apparel/accessories" component={Accessories} />
 
-            <Route path="/apparel/accessories/:id" component={ProductDetails} />
-            <Route path="/apparel/accessories" component={Accessories} />
+          <Route path="/user/login" render={(props) => <Login {...props} changeLoggedState={setIsLogged} />} />
+          <Route path="/user/register" component={Register} />
 
-            <Route path="/user/login" render={(props) => <Login {...props} changeLoggedState={this.changeLoggedState} />} />
-            <Route path="/user/register" component={Register} />
-
-            <Route path="/user/orders" component={UserOrders} />
-            <Route path="/user/cart" component={CartItems} />
-          </Switch>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    );
-  }
-}
+          <Route path="/user/orders" component={UserOrders} />
+          <Route path="/user/cart" component={CartItems} />
+        </Switch>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default App;
