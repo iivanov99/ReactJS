@@ -1,4 +1,4 @@
-import React, { Fragment, Component, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import ApparelHeading from '../ApparelHeading/ApparelHeading';
 import ProductList from '../../Products/ProductList/ProductList';
 import apparelService from '../../../services/apparel-service';
