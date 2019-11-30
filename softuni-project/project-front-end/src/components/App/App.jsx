@@ -13,6 +13,7 @@ import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
 import UserOrders from '../UserOrders/UserOrders';
 import CartItems from '../Cart/CartItems/CartItems';
+import PendingOrders from '../PendingOrders/PendingOrders';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -30,7 +31,7 @@ const parseCookies = () => {
 const App = () => {
 
   const [isLogged, setIsLogged] = useState(!!parseCookies()['auth_token']);
-  const [isAdmin] = useState(false);
+  const [isAdmin] = useState(true);
 
   return (
     <BrowserRouter>
@@ -53,6 +54,8 @@ const App = () => {
 
           <Route path="/user/orders" component={UserOrders} />
           <Route path="/user/cart" component={CartItems} />
+
+          <Route path="/admin/pending-orders" component={PendingOrders} />
         </Switch>
         <Footer />
       </div>

@@ -1,0 +1,10 @@
+.fa-check-icon {
+  cursor: pointer;
+  color: green;
+  margin-right: 7px;
+}
+
+.fa-times-icon {
+  cursor: pointer;
+  color: red;
+}

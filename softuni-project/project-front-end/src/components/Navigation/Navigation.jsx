@@ -28,9 +28,9 @@ const Navigation = ({ isLogged, isAdmin, changeLoggedState }) => {
 
           {isLogged && isAdmin ? (<Link className="nav-link" to="/admin/pending-orders">Pending Orders</Link>) : null}
           {isLogged && isAdmin ? (<NavDropdown title="Add New" id="basic-nav-dropdown">
-            <Link className="dropdown-item" to="/apparel/men">Men</Link>
-            <Link className="dropdown-item" to="/apparel/women">Women</Link>
-            <Link className="dropdown-item" to="/apparel/accessories">Accessories</Link>
+            <Link className="dropdown-item" to="/apparel/create/men">Men</Link>
+            <Link className="dropdown-item" to="/apparel/create/women">Women</Link>
+            <Link className="dropdown-item" to="/apparel/create/accessories">Accessories</Link>
           </NavDropdown>) : null}
 
         </Nav>
