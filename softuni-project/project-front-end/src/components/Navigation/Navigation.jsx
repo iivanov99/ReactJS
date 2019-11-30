@@ -6,6 +6,7 @@ import './Navigation.css';
 import { toast } from 'react-toastify';
 
 const Navigation = ({ isLogged, isAdmin, changeLoggedState }) => {
+  
   const handleLogoutClick = async () => {
     await userService.logout();
     changeLoggedState(false);
