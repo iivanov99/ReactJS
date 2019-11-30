@@ -6,16 +6,14 @@ const ProductDetails = ({ match }) => {
 
   const [product, setProduct] = useState({});
 
-  const fetchProduct = async () => {
-    const apparelType = match.path.split('/')[2];
-    const apparelId = match.params.id;
-    setProduct(await apparelService.loadOne(apparelType, apparelId));
-  };
-
   useEffect(() => {
+    const fetchProduct = async () => {
+      const apparelType = match.path.split('/')[2];
+      const apparelId = match.params.id;
+      setProduct(await apparelService.loadOne(apparelType, apparelId));
+    };
     fetchProduct();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [match.params.id, match.path]);
 
   if (!Object.keys(product).length) {
     return (<div className="loading-div"></div>);
