@@ -8,7 +8,7 @@ module.exports = {
 
       if (user.role === 'admin') {
         orders = await models.Order
-          .find({})
+          .find({status: 'Pending'})
           .populate('creatorId', 'username');
         res.json(orders);
         return;
