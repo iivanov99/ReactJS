@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import ApparelHeading from '../ApparelHeading/ApparelHeading';
-import ProductList from '../../Products/ProductList/ProductList';
+import ProductList from '../../Products/ProductList';
 import apparelService from '../../../services/apparel-service';
 
 const MostPopularSection = () => {

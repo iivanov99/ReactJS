@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PendingOrdersHeading from './PendingOrdersHeading';
-import PendingOrder from './PendingOrder';
+import PendingOrder from './PendingOrder/PendingOrder';
 
 const PendingOrders = () => {
   return (

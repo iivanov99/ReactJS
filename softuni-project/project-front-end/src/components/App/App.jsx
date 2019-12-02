@@ -12,7 +12,7 @@ import Register from '../Register/Register';
 import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
 import UserOrders from '../UserOrders/UserOrders';
-import CartItems from '../Cart/CartItems/CartItems';
+import CartItems from '../Cart/CartItems';
 import PendingOrders from '../PendingOrders/PendingOrders';
 import CreateMens from '../CreateForms/CreateMens';
 import CreateWomens from '../CreateForms/CreateWomens';

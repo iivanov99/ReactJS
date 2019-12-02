@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import ProductList from '../../Products/ProductList/ProductList';
+import ProductList from '../../Products/ProductList';
 import ApparelSectionHeading from './ApparelSectionHeading';
 import './ApparelSection.css';
 

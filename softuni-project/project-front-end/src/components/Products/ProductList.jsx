@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from './ProductCard/ProductCard';
 
 const ProductList = ({ apparel, apparelType }) => {
   return (

@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 
-import CartHead from '../CartHead/CartHead';
-import CartItem from '../CartItem/CartItem';
-import CheckoutButton from '../CheckoutButton/CheckoutButton';
+import CartItem from './CartItem/CartItem';
+import CheckoutButton from './CheckoutButton/CheckoutButton';
 
 import './CartItems.css';
 
@@ -18,7 +17,14 @@ const Cart = () => {
       <div className="row row-silver row-cart">
         <div className="col-md-12">
           <table className="table">
-            <CartHead />
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
             <tbody>
               <CartItem item="Whey Protein" price="100" />
               <CartItem item="Creatin Monohydrate" price="34" />
