@@ -1,19 +1,39 @@
-import React, { Fragment } from 'react';
-
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import CartHeading from './CartHeading/CartHeading';
 import CartItem from './CartItem/CartItem';
 import CheckoutButton from './CheckoutButton/CheckoutButton';
-
+import cartService from '../../services/cart-service';
 import './CartItems.css';
 
 const Cart = () => {
+
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const userCartItems = await cartService.loadAll();
+      setCartItems(userCartItems);
+    })();
+  }, [])
+
+  if (!cartItems.length) {
+    return (
+      <Fragment>
+        <CartHeading />
+        <div className="row row-silver">
+          <div className="col-md-12 col-empty-cart">
+            <h2 className="empty-cart-heading">There are currently no items in you cart...</h2>
+            <Link to="/" className="btn empty-cart-btn">Go Shopping</Link>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+
   return (
     <Fragment>
-      <div className="row row-silver">
-        <div className="col-md-12">
-          <h1 className="cart-heading"><span className="underline">Cart</span></h1>
-        </div>
-      </div>
-
+      <CartHeading />
       <div className="row row-silver row-cart">
         <div className="col-md-12">
           <table className="table">
@@ -26,8 +46,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              <CartItem item="Whey Protein" price="100" />
-              <CartItem item="Creatin Monohydrate" price="34" />
+              {cartItems.map(({ name, price }) => <CartItem item={name} price={price} />)}
             </tbody>
           </table>
         </div>

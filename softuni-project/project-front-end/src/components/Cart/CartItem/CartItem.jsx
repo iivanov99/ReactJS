@@ -7,7 +7,7 @@ const CartItem = ({ item, price }) => {
   const [total, setTotal] = useState(price);
 
   useEffect(() => {
-    setTotal(quantity * price);
+    setTotal((quantity * price).toFixed(2));
   }, [quantity, price]);
 
   return (

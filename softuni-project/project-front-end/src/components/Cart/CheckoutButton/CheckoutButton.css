@@ -1,6 +1,6 @@
 .checkout-row {
   padding-top: 0;
-  min-height: calc(100vh - 610px);
+  min-height: 200px;
 }
 
 .checkout-col {
