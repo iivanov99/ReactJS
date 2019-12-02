@@ -15,7 +15,7 @@ const Cart = () => {
       const userCartItems = await cartService.loadAll();
       setCartItems(userCartItems);
     })();
-  }, [])
+  }, []);
 
   if (!cartItems.length) {
     return (
@@ -43,10 +43,12 @@ const Cart = () => {
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Total</th>
+                <th scope="col">Remove</th>
               </tr>
             </thead>
             <tbody>
-              {cartItems.map(({ _id, name, price }) => <CartItem key={_id} item={name} price={price} />)}
+              {cartItems.map(({ _id, name, price }) =>
+                <CartItem key={_id} _id={_id} item={name} price={price} setCartItems={setCartItems} cartItems={cartItems} />)}
             </tbody>
           </table>
         </div>

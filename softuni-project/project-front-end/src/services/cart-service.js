@@ -19,6 +19,16 @@ const cartService = {
       body: JSON.stringify(data)
     });
     return res.json();
+  },
+  deleteFromCart: async (id) => {
+    const res = await fetch(`http://localhost:8080/api/cart-items/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'DELETE',
+      credentials: 'include'
+    });
+    return res.json();
   }
 };
 
