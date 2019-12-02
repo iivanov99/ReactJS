@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './PendingOrder.css';
 
-const PendingOrder = ({ name, date, price }) => {
+const PendingOrder = ({ user, name, date, price }) => {
   return (
     <tr>
+      <td>{user}</td>
       <td>{name}</td>
       <td>{date}</td>
       <td>$ {price}</td>
