@@ -34,12 +34,12 @@ const parseCookies = () => {
 const App = () => {
 
   const [isLogged, setIsLogged] = useState(!!parseCookies()['auth_token']);
-  const [isAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   return (
     <BrowserRouter>
       <div className="container-fluid">
-        <Navigation isLogged={isLogged} isAdmin={isAdmin} changeLoggedState={setIsLogged} />
+        <Navigation isLogged={isLogged} isAdmin={isAdmin} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />
         <Switch>
           <Route path="/" exact render={(props) => <HomePage {...props} isLogged={isLogged} />} />
 
@@ -52,7 +52,7 @@ const App = () => {
           <Route path="/apparel/accessories/:id" component={ProductDetails} />
           <Route path="/apparel/accessories" component={Accessories} />
 
-          <Route path="/user/login" render={(props) => <Login {...props} changeLoggedState={setIsLogged} />} />
+          <Route path="/user/login" render={(props) => <Login {...props} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />} />
           <Route path="/user/register" component={Register} />
 
           <Route path="/user/orders" component={UserOrders} />

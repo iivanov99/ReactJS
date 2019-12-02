@@ -3,11 +3,11 @@ import React, { Fragment } from 'react';
 import LoginHeading from './LoginHeading/LoginHeading';
 import LoginForm from './LoginForm/LoginForm';
 
-const Login = ({ history, changeLoggedState }) => {
+const Login = ({ history, setIsLogged, setIsAdmin }) => {
   return (
     <Fragment>
       <LoginHeading />
-      <LoginForm history={history} changeLoggedState={changeLoggedState} />
+      <LoginForm history={history} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />
     </Fragment>
   );
 };

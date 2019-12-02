@@ -1,7 +1,26 @@
 import React, { Fragment, useState } from 'react';
+import { toast } from 'react-toastify';
+import * as yup from 'yup';
 import './CreateForm.css';
 
-const CreateForm = ({ formName, categoryOptions }) => {
+const schema = yup.object().shape({
+  name: yup.string()
+    .required('Name is required!')
+    .min(2, 'Name must be atleast 2 symbols!'),
+  description: yup.string()
+    .required('Description is required!')
+    .min(10, 'Description must be atleast 10 symbols!')
+    .max(200, 'Description must not exceed 200 symbols!'),
+  imageUrl: yup.string()
+    .required('Image Url is required!')
+    .url('Image Url is not valid!'),
+  category: yup.string()
+    .notOneOf(['Choose category'], 'Please choose category!'),
+  price: yup.string()
+    .required('Price is required!')
+});
+
+const CreateForm = ({ formName, categoryOptions, history }) => {
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -10,13 +29,30 @@ const CreateForm = ({ formName, categoryOptions }) => {
   const [category, setCategory] = useState('Choose category');
   const [price, setPrice] = useState('');
 
-  console.log({ name, description, imageUrl, size, category, price });
+  const formSubmitHandler = async (ev) => {
+    ev.preventDefault();
+
+    try {
+      await schema.validate({ name, description, imageUrl, category, price }, { abortEarly: false });
+      //TODO: fetch to create new entity
+      history.push(`/apparel/${formName.toLowerCase()}`);
+      toast.dismiss()
+      toast.success('Apparel successfuly created!');
+    } catch (err) {
+      toast.dismiss();
+
+      if (err.inner) {
+        err.inner.forEach(innerErr => toast.error(innerErr.message));
+        return;
+      }
+    }
+  }
 
   return (
     <Fragment>
       <div className="row row-dark-grey">
         <div className="col-md-12">
-          <form className="create-form">
+          <form onSubmit={formSubmitHandler} className="create-form">
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input onChange={ev => setName(ev.target.value)} value={name} className="form-control"
@@ -48,7 +84,7 @@ const CreateForm = ({ formName, categoryOptions }) => {
                 <label htmlFor="category">Category: </label>
                 <select onChange={ev => setCategory(ev.target.value)} value={category} className="form-control select-control" >
                   <option disabled>Choose category</option>
-                  {categoryOptions.map(option => <option>{option}</option>)}
+                  {categoryOptions.map((option, index) => <option key={index}>{option}</option>)}
                 </select>
               </div>
               <div className="price-container">

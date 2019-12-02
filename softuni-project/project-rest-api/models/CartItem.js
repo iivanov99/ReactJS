@@ -14,7 +14,7 @@ const cartSchema = new Schema({
     type: Schema.Types.Date,
     default: new Date().toLocaleString()
   },
-  creator: {
+  creatorId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Creator is required!']

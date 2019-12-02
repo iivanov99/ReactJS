@@ -5,11 +5,12 @@ import userService from '../../services/user-service';
 import './Navigation.css';
 import { toast } from 'react-toastify';
 
-const Navigation = ({ isLogged, isAdmin, changeLoggedState }) => {
-  
+const Navigation = ({ isLogged, isAdmin, setIsLogged, setIsAdmin }) => {
+
   const handleLogoutClick = async () => {
     await userService.logout();
-    changeLoggedState(false);
+    setIsLogged(false);
+    setIsAdmin(false);
     toast.dismiss();
     toast.success('Logged out successfuly!');
   };

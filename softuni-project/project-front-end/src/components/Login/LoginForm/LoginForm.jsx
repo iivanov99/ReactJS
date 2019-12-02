@@ -14,7 +14,7 @@ const schema = yup.object().shape({
     .max(12, 'Password must not exceed 12 symbols!')
 });
 
-const LoginForm = ({ history, changeLoggedState }) => {
+const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,9 +24,9 @@ const LoginForm = ({ history, changeLoggedState }) => {
 
     try {
       await schema.validate({ email, password }, { abortEarly: false });
-      await userService.login({ email, password });
-
-      changeLoggedState(true);
+      const user = await userService.login({ email, password });
+      setIsLogged(true);
+      setIsAdmin(user.role === 'admin');
       history.push('/');
 
       toast.dismiss();
