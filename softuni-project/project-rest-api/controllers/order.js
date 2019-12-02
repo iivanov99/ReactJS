@@ -3,9 +3,19 @@ const models = require('../models');
 module.exports = {
   get: {
     all: async (req, res, next) => {
-      const orders = await models.Order
-        .find({})
-        .populate('creator', 'username');
+      const { user } = req;
+      let orders = [];
+
+      if (user.role === 'admin') {
+        orders = await models.Order
+          .find({})
+          .populate('creatorId', 'username');
+        res.json(orders);
+        return;
+      }
+
+      orders = await models.Order
+        .find({ creatorId: user._id });
       res.json(orders);
     },
     one: async (req, res, next) => {
@@ -13,7 +23,7 @@ module.exports = {
         const { id } = req.params;
         const order = await models.Order
           .findOne({ _id: id })
-          .populate('creator', 'username');
+          .populate('creatorId', 'username');
         res.json(order);
       } catch (err) {
         next(err);
@@ -24,7 +34,7 @@ module.exports = {
     try {
       const { user } = req;
       const { name, price } = req.body;
-      const createdOrder = await models.Order.create({ name, price, status: 'Pending', creator: user._id });
+      const createdOrder = await models.Order.create({ name, price, status: 'Pending', creatorId: user._id });
       await models.User.updateOne({ _id: user._id }, { $push: { orders: createdOrder._id } });
       res.json(createdOrder);
     } catch (err) {
