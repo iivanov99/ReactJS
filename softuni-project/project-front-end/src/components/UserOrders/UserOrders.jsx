@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import UserOrdersHeading from './UserOrdersHeading/UserOrdersHeading';
 import UserOrder from './UserOrder';
 import ordersService from '../../services/orders-service';
@@ -14,6 +15,20 @@ const UserOrders = () => {
       setOrders(ordersData);
     })();
   }, []);
+
+  if (!orders.length) {
+    return (
+      <Fragment>
+        <UserOrdersHeading />
+        <div className="row row-silver">
+          <div className="col-md-12 col-empty-cart">
+            <h2 className="empty-cart-heading">There are currently no orders from your account...</h2>
+            <Link to="/" className="btn empty-cart-btn">Go Shopping</Link>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
 
   return (
     <Fragment>
