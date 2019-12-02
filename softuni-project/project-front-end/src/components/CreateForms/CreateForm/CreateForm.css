@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.row-create-form {
-  padding-bottom: 0;
-}
-
 .flex-container {
   display: flex;
   justify-content: space-between;

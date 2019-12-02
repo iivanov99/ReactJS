@@ -10,7 +10,7 @@ const schema = yup.object().shape({
     .email('Email is not valid!'),
   password: yup.string()
     .required('Password is required!')
-    .min(4, 'Password must be atleast 4 symbols!')
+    .min(8, 'Password must be atleast 8 symbols!')
     .max(12, 'Password must not exceed 12 symbols!')
 });
 

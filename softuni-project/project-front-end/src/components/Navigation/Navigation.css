@@ -30,6 +30,7 @@
 
 .dropdown-menu {
   padding: 0;
+  border-style: none;
 }
 
 .dropdown-item {

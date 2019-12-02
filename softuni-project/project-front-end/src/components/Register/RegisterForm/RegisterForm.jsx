@@ -14,7 +14,7 @@ const schema = yup.object().shape({
     .max(12, 'Username must not exceed 12 symbols!'),
   password: yup.string()
     .required('Password is required!')
-    .min(4, 'Password must be atleast 4 symbols!')
+    .min(8, 'Password must be atleast 8 symbols!')
     .max(12, 'Password must not exceed 12 symbols!'),
   rePassword: yup.string()
     .oneOf([yup.ref('password'), null], 'Passwords don\'t match!')

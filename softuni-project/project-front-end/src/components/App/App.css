@@ -37,6 +37,25 @@ span.deep-orange-text {
   z-index: -1;
 }
 
+.loading-div {
+  height: 100vh;
+  background-color: silver;
+}
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.content-loaded {
+  animation-name: load;
+  animation-duration: 1.3s;
+}
+
 .register-form button.form-btn,
 .login-form button.form-btn {
   color: #0c0c0e;
@@ -50,4 +69,22 @@ span.deep-orange-text {
   color: #ec7f37;
   border-color: #ec7f37;
   background: #0c0c0e;
+}
+
+button.btn {
+  color: #ec7f37;
+  border-color: #ec7f37;
+}
+
+button.btn:hover {
+  color: #ec7f37;
+  border-color: #ec7f37;
+  background-color: #262626;
+}
+
+button.form-btn {
+  color: #0c0c0e;
+  border-color: #0c0c0e;
+  background: #ec7f37;
+  margin-top: 5px;
 }

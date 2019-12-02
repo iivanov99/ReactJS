@@ -14,6 +14,9 @@ import HomePage from '../HomePage/HomePage';
 import UserOrders from '../UserOrders/UserOrders';
 import CartItems from '../Cart/CartItems/CartItems';
 import PendingOrders from '../PendingOrders/PendingOrders';
+import CreateMens from '../CreateForms/CreateMens';
+import CreateWomens from '../CreateForms/CreateWomens';
+import CreateAccessories from '../CreateForms/CreateAccessories';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -56,6 +59,9 @@ const App = () => {
           <Route path="/user/cart" component={CartItems} />
 
           <Route path="/admin/pending-orders" component={PendingOrders} />
+          <Route path="/apparel/create/men" component={CreateMens} />
+          <Route path="/apparel/create/women" component={CreateWomens} />
+          <Route path="/apparel/create/accessories" component={CreateAccessories} />
         </Switch>
         <Footer />
       </div>
