@@ -1,8 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import apparelService from '../../../services/apparel-service';
+import cartService from '../../../services/cart-service';
 import './ProductDetails.css';
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = ({ match, history }) => {
 
   const [product, setProduct] = useState({});
 
@@ -18,6 +21,12 @@ const ProductDetails = ({ match }) => {
   if (!Object.keys(product).length) {
     return (<div className="loading-div"></div>);
   }
+
+  const handleClick = async () => {
+    await cartService.addToCart({ name: product.name, price: product.price });
+    history.push('/user/cart');
+    toast.success('Item successfully added to your cart!');
+  };
 
   return (
     <Fragment>
@@ -43,7 +52,8 @@ const ProductDetails = ({ match }) => {
             <p><span className="bolder-text">Size</span>: {product.size}</p>
             <p><span className="bolder-text">Ordered: </span> {product.ordersCount} times</p>
             <p><span className="bolder-text">Price: </span><br /> <span className="span-price">${product.price}</span></p>
-            <a href="#add-to-cart" className="btn card-btn">Add to Cart</a>
+            <Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>
+
           </div>
         </div>
         <div className="col"></div>
