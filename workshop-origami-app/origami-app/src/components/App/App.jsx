@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -25,44 +25,29 @@ const parseCookies = () => {
   }, {});
 };
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogged: !!parseCookies()['x-auth-token']
-    };
-    this.changeLoggedState = this.changeLoggedState.bind(this);
-  }
+const App = () => {
 
-  changeLoggedState(newState) {
-    this.setState({
-      isLogged: newState
-    });
-  }
+  const [isLogged, setIsLogged] = useState(!!parseCookies()['x-auth-token']);
 
-  render() {
-    const { isLogged } = this.state;
-
-    return (
-      <BrowserRouter>
-        <div>
-          <Navigation isLogged={isLogged} changeLoggedState={this.changeLoggedState} />
-          <div className="Container">
-            <Aside />
-            <Switch>
-              <Route path="/" exact component={Main} />
-              <Route path="/posts/create" component={CreatePost} />
-              <Route path="/user/register" component={Register} />
-              <Route path="/user/login" render={(props) => <Login {...props} changeLoggedState={this.changeLoggedState} />} />
-              <Route path="/user/profile" component={Profile} />
-              <Route component={PageNotFound} />
-            </Switch>
-          </div>
-          <Footer />
+  return (
+    <BrowserRouter>
+      <div>
+        <Navigation isLogged={isLogged} setIsLogged={setIsLogged} />
+        <div className="Container">
+          <Aside />
+          <Switch>
+            <Route path="/" exact component={Main} />
+            <Route path="/posts/create" component={CreatePost} />
+            <Route path="/user/register" component={Register} />
+            <Route path="/user/login" render={(props) => <Login {...props} setIsLogged={setIsLogged} />} />
+            <Route path="/user/profile" component={Profile} />
+            <Route component={PageNotFound} />
+          </Switch>
         </div>
-      </BrowserRouter>
-    );
-  }
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
 };
 
 export default App;

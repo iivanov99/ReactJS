@@ -1,5 +1,5 @@
 import React from 'react';
-import AllPosts from '../Posts/AllPosts/AllPosts';
+import Posts from '../Posts/Posts';
 
 import './Profile.css';
 
@@ -19,7 +19,7 @@ const Profile = () => {
       </div>
       <div>
         <h2>3 of you recent posts</h2>
-        <AllPosts limit={3}/>
+        <Posts limit={3}/>
       </div>
     </div>
   );
