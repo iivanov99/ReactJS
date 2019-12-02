@@ -42,7 +42,7 @@ module.exports = {
   },
   delete: async (req, res, next) => {
     try {
-      const { id } = req.paramsls
+      const { id } = req.params;
       const deleteInfo = await models.CartItem.deleteOne({ _id: id });
       res.json(deleteInfo);
     } catch (err) {
