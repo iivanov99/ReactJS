@@ -1,9 +1,18 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import cartService from '../../../services/cart-service';
 import './ProductCard.css';
 
-const ProductCard = ({ apparelType, id, name, imageUrl, description, price }) => {
+const ProductCard = ({ apparelType, id, name, imageUrl, description, price, history }) => {
+
+  const handleClick = async () => {
+    await cartService.addToCart({ name, price });
+    history.push('/user/cart');
+    toast.success('Item successfully added to your cart!');
+  };
+
   return (
     <Fragment>
       <div className="col-md-3 card-col">
@@ -15,7 +24,7 @@ const ProductCard = ({ apparelType, id, name, imageUrl, description, price }) =>
             <div className="card-info">
               <p>Price: <br></br> <span className="span-price">${price}</span></p>
               <div className="card-buttons">
-                <a href="#cart" className="btn card-btn">Add to Cart</a>
+                <Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>
               </div>
             </div>
           </Card.Body>

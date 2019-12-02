@@ -3,7 +3,7 @@ import ApparelHeading from '../ApparelHeading/ApparelHeading';
 import ProductList from '../../Products/ProductList';
 import apparelService from '../../../services/apparel-service';
 
-const MostPopularSection = () => {
+const MostPopularSection = ({ history }) => {
 
   const [menApparel, setMenApparel] = useState([]);
   const [womenApparel, setWomenApparel] = useState([]);
@@ -34,13 +34,13 @@ const MostPopularSection = () => {
       </div>
 
       <ApparelHeading name="Men Apparel" />
-      <ProductList apparel={menApparel} apparelType="men" />
+      <ProductList apparel={menApparel} apparelType="men" history={history} />
 
       <ApparelHeading name="Women Apparel" />
-      <ProductList apparel={womenApparel} apparelType="women" />
+      <ProductList apparel={womenApparel} apparelType="women" history={history} />
 
       <ApparelHeading name="Accessories" />
-      <ProductList apparel={accessories} apparelType="accessories" />
+      <ProductList apparel={accessories} apparelType="accessories" history={history} />
     </Fragment>
   );
 };
