@@ -1,15 +1,26 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import UserOrdersHeading from './UserOrdersHeading/UserOrdersHeading';
 import UserOrder from './UserOrder';
+import ordersService from '../../services/orders-service';
 import './UserOrders.css';
 
 const UserOrders = () => {
+
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const ordersData = await ordersService.loadAll();
+      setOrders(ordersData);
+    })();
+  }, []);
+
   return (
     <Fragment>
       <UserOrdersHeading />
-      <div class="row row-silver row-orders">
-        <div class="col-md-12">
-          <table class="table">
+      <div className="row row-silver row-orders">
+        <div className="col-md-12">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">Name</th>
@@ -19,9 +30,8 @@ const UserOrders = () => {
               </tr>
             </thead>
             <tbody>
-              <UserOrder name="Whey Protein" date="15.05.2018" price="99.99" status="Pending" />
-              <UserOrder name="Creatin Monohydarate" date="21.03.2018" price="35.97" status="Accepted" />
-              <UserOrder name="L Glutamine" date="02.07.2019" price="33.99" status="Declined" />
+              {orders.map(({ _id, name, date, price, status }) =>
+                <UserOrder key={_id} name={name} date={date} price={price} status={status} />)}
             </tbody>
           </table>
         </div>

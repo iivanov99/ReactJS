@@ -16,8 +16,8 @@ const orderSchema = new Schema({
     required: [true, 'Order status is required!']
   },
   date: {
-    type: Schema.Types.Date,
-    default: new Date().toLocaleString()
+    type: Schema.Types.String,
+    default: new Date(Date.now()).toLocaleString()
   },
   creatorId: {
     type: Schema.Types.ObjectId,

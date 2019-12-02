@@ -3,9 +3,9 @@ import './UserOrdersHeading.css';
 
 const UserOrdersHeading = () => {
   return (
-    <div class="row row-silver">
-      <div class="col-md-12">
-        <h1 class="orders-heading">My <span class="underline">Orders</span></h1>
+    <div className="row row-silver">
+      <div className="col-md-12">
+        <h1 className="orders-heading">My <span className="underline">Orders</span></h1>
       </div>
     </div>
   );
