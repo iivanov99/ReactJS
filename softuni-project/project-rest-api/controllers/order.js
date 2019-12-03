@@ -56,14 +56,26 @@ module.exports = {
       }
     }
   },
-  put: async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const { name, price } = req.body;
-      const updatedOrder = await models.Order.updateOne({ _id: id }, { name, price });
-      res.json(updatedOrder);
-    } catch (err) {
-      next(err);
+  put: {
+    one: async (req, res, next) => {
+      try {
+        const { id } = req.params;
+        const { name, price } = req.body;
+        const updatedOrder = await models.Order.updateOne({ _id: id }, { name, price });
+        res.json(updatedOrder);
+      } catch (err) {
+        next(err);
+      }
+    },
+    editStatus: async (req, res, next) => {
+      try {
+        const { id } = req.params;
+        const { status } = req.body;
+        const updateInfo = await models.Order.updateOne({ _id: id }, { status });
+        res.json(updateInfo);
+      } catch (err) {
+        next(err);
+      }
     }
   },
   delete: async (req, res, next) => {

@@ -8,7 +8,7 @@ router.get('/:id', auth.forbidGuests, controllers.order.get.one);
 
 router.post('/', auth.forbidGuests, controllers.order.post.many);
 
-router.put('/:id', auth.permitAdminOnly, controllers.order.put);
+router.put('/status/:id', auth.permitAdminOnly, controllers.order.put.editStatus);
 
 router.delete('/:id', auth.permitAdminOnly, controllers.order.delete);
 
