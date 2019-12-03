@@ -45,7 +45,7 @@ const CartItems = ({ history }) => {
                 <tbody>
                   {cartItems.map(({ _id, name, price, date }) =>
                     <CartItem key={_id} _id={_id} item={name} price={price} date={date}
-                      cartItems={cartItems} setCartItems={setCartItems} />)}
+                      setCartItems={setCartItems} />)}
                 </tbody>
               </table>
             </div>

@@ -5,12 +5,11 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import cartService from '../../../services/cart-service';
 import './CartItem.css';
 
-const CartItem = ({ _id, item, price, date, cartItems, setCartItems }) => {
+const CartItem = ({ _id, item, price, date, setCartItems }) => {
 
   const handleRemoveClick = async () => {
     await cartService.deleteFromCart(_id);
-    const updatedCartItems = cartItems.filter(({ _id: cartId }) => cartId !== _id);
-    setCartItems(updatedCartItems);
+    setCartItems(await cartService.loadAll());
     toast.success(`${item} removed from the cart`);
   };
 
