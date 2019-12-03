@@ -1,11 +1,24 @@
 import React from 'react';
-import './CheckoutButton.css';
+import { Link } from 'react-router-dom';
 
-const CheckoutButton = () => {
+import cartService from '../../../services/cart-service';
+
+import './CheckoutButton.css';
+import { toast } from 'react-toastify';
+
+const CheckoutButton = ({ cartItems, history }) => {
+
+  const handleCheckoutClick = async (ev) => {
+    ev.preventDefault();
+    await cartService.checkout(cartItems);
+    history.push('/user/orders');
+    toast.success('Checkout was successful!');
+  };
+
   return (
     <div className="row row-silver checkout-row">
       <div className="col-md-12 checkout-col">
-        <a href="#checkout" className="btn checkout-btn">Checkout</a>
+        <Link onClick={handleCheckoutClick} className="btn checkout-btn" to="">Checkout</Link>
       </div>
     </div>
   );

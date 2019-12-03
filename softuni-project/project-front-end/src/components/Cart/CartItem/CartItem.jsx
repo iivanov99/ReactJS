@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import cartService from '../../../services/cart-service';
 import './CartItem.css';
 
-const CartItem = ({ _id, item, price, cartItems, setCartItems }) => {
-
-  const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(price);
-
-  useEffect(() => {
-    setTotal((quantity * price).toFixed(2));
-  }, [quantity, price]);
+const CartItem = ({ _id, item, price, date, cartItems, setCartItems }) => {
 
   const handleRemoveClick = async () => {
     await cartService.deleteFromCart(_id);
@@ -23,16 +16,12 @@ const CartItem = ({ _id, item, price, cartItems, setCartItems }) => {
 
   return (
     <tr>
+      <td>{date}</td>
       <td>{item}</td>
       <td>$ {price}</td>
       <td>
-        <input
-          onChange={ev => setQuantity(ev.target.value)} value={quantity}
-          className="cart-input" type="number" min="1" max="10" />
-      </td>
-      <td>$ {total}</td>
-      <td>
-        <FontAwesomeIcon onClick={handleRemoveClick} className="fa-times-icon rm-cart-item-btn" icon={faTimes} size="2x" />
+        <FontAwesomeIcon onClick={handleRemoveClick}
+          className="fa-times-icon rm-cart-item-btn" icon={faTimes} size="2x" />
       </td>
     </tr>
   );

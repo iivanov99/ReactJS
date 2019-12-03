@@ -13,7 +13,7 @@ const orderSchema = new Schema({
   status: {
     type: Schema.Types.String,
     enum: ['Pending', 'Accepted', 'Declined'],
-    required: [true, 'Order status is required!']
+    default: 'Pending'
   },
   date: {
     type: Schema.Types.String,

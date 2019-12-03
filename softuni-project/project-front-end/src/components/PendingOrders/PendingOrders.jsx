@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PendingOrdersHeading from './PendingOrdersHeading';
 import PendingOrder from './PendingOrder/PendingOrder';
-import ordersService from '../../services/orders-service';
+import orderService from '../../services/order-service';
 
 const PendingOrders = () => {
 
@@ -10,7 +10,7 @@ const PendingOrders = () => {
 
   useEffect(() => {
     (async () => {
-      const pendingOrdersData = await ordersService.loadAll();
+      const pendingOrdersData = await orderService.loadAll();
       console.log(pendingOrdersData);
       setPendingOrders(pendingOrdersData);
     })();

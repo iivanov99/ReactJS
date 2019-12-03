@@ -29,6 +29,17 @@ const cartService = {
       credentials: 'include'
     });
     return res.json();
+  },
+  checkout: async (cartItems) => {
+    const res = await fetch('http://localhost:8080/api/cart-items/checkout', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(cartItems)
+    });
+    return res.json();
   }
 };
 

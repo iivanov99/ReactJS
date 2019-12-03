@@ -1,4 +1,4 @@
-const cartService = {
+const orderService = {
   loadAll: async () => {
     const res = await fetch('http://localhost:8080/api/orders', {
       method: 'GET',
@@ -9,4 +9,4 @@ const cartService = {
   }
 };
 
-export default cartService; 
+export default orderService; 

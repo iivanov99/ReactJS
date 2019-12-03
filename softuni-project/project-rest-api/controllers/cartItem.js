@@ -4,8 +4,7 @@ module.exports = {
   get: {
     all: async (req, res, next) => {
       const { _id: userId } = req.user;
-      const cartItems = await models.CartItem
-        .find({ creatorId: userId })
+      const cartItems = await models.CartItem.find({ creatorId: userId })
       res.json(cartItems);
     },
     one: async (req, res, next) => {
@@ -34,10 +33,23 @@ module.exports = {
     checkout: async (req, res, next) => {
       try {
         const { user } = req;
-        console.log(user);
+        const insertData = req.body;
 
+        const ordersToInsert = insertData.map(({ name, price, creatorId }) => ({ name, price, creatorId }));
+        const insertedOrders = await models.Order.insertMany(ordersToInsert);
+
+        let insertedOrdersIds = [];
+        insertedOrders.forEach(({ _id }) => insertedOrdersIds.push(_id));
+
+        await Promise.all([
+          models.CartItem.deleteMany({ creatorId: user._id }),
+          models.User.updateOne({ _id: user._id }, { $set: { cartItems: [] } }),
+          models.User.updateOne({ _id: user._id }, { $push: { orders: { $each: insertedOrdersIds } } })
+        ]);
+
+        res.json(insertedOrders);
       } catch (err) {
-
+        next(err);
       }
     }
   },

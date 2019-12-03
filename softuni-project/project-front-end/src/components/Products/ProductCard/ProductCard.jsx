@@ -7,7 +7,8 @@ import './ProductCard.css';
 
 const ProductCard = ({ apparelType, id, name, imageUrl, description, price, history }) => {
 
-  const handleClick = async () => {
+  const handleClick = async (ev) => {
+    ev.preventDefault();
     await cartService.addToCart({ name, price });
     history.push('/user/cart');
     toast.success(`${name} successfully added to your cart!`);
