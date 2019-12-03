@@ -55,8 +55,10 @@ module.exports = {
     all: async (req, res, next) => {
       try {
         const { user } = req;
-        const deleteInfo = await models.CartItem.deleteMany({ creatorId: user._id });
-        await models.User.updateOne({ _id: user._id }, { $set: { cartItems: [] } });
+        const [deleteInfo, updateInfo] = await Promise.all([
+          models.CartItem.deleteMany({ creatorId: user._id }),
+          models.User.updateOne({ _id: user._id }, { $set: { cartItems: [] } })
+        ]);
         res.json(deleteInfo);
       } catch (err) {
         next(err);
