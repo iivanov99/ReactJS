@@ -1,17 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import PendingOrdersHeading from './PendingOrdersHeading';
 import PendingOrder from './PendingOrder/PendingOrder';
 import orderService from '../../services/order-service';
 
-const PendingOrders = () => {
+const PendingOrders = ({ history }) => {
 
   const [pendingOrders, setPendingOrders] = useState([]);
 
   useEffect(() => {
     (async () => {
       const pendingOrdersData = await orderService.loadAll();
-      console.log(pendingOrdersData);
       setPendingOrders(pendingOrdersData);
     })();
   }, []);
@@ -47,7 +47,9 @@ const PendingOrders = () => {
             </thead>
             <tbody>
               {pendingOrders.map(({ _id, name, price, date, creatorId }) =>
-                <PendingOrder key={_id} name={name} date={date} price={price} user={creatorId.username} />)}
+                <PendingOrder key={_id} _id={_id} name={name}
+                  date={date} price={price} user={creatorId.username}
+                  setPendingOrders={setPendingOrders} />)}
             </tbody>
           </table>
         </div>

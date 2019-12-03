@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import UserOrdersHeading from './UserOrdersHeading/UserOrdersHeading';
-import UserOrder from './UserOrder';
+import UserOrder from './UserOrder/UserOrder';
 import orderService from '../../services/order-service';
 
 import './UserOrders.css';

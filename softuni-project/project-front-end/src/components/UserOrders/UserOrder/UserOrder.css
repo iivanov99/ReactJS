@@ -1,0 +1,11 @@
+p.status {
+  margin: 0;
+}
+
+.accepted-order {
+  color: green;
+}
+
+.declined-order {
+  color: red;
+}
