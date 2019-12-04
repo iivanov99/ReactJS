@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import cartService from '../../../services/cart-service';
 import './ProductCard.css';
 
-const ProductCard = ({ apparelType, id, name, imageUrl, description, price, history }) => {
+const ProductCard = ({ apparelType, id, name, imageUrl, description, price, isLogged, isAdmin, history }) => {
 
   const handleClick = async (ev) => {
     ev.preventDefault();
@@ -25,7 +25,13 @@ const ProductCard = ({ apparelType, id, name, imageUrl, description, price, hist
             <div className="card-info">
               <p>Price: <br></br> <span className="span-price">${price}</span></p>
               <div className="card-buttons">
-                <Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>
+                {/* {isLogged && !isAdmin ? (<Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>) : null} */}
+                {isLogged ? (
+                  <Fragment>
+                    <Link onClick={handleClick} to="" className="btn card-btn">Edit</Link>
+                    <Link onClick={handleClick} to="" className="btn card-btn">Delete</Link>
+                  </Fragment>
+                ) : null}
               </div>
             </div>
           </Card.Body>

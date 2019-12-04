@@ -11,6 +11,7 @@ const Navigation = ({ isLogged, isAdmin, setIsLogged, setIsAdmin }) => {
     await userService.logout();
     setIsLogged(false);
     setIsAdmin(false);
+    document.cookie = "role= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     toast.dismiss();
     toast.success('Logged out successfuly!');
   };
