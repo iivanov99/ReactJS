@@ -34,7 +34,7 @@ const parseCookies = () => {
 const App = () => {
 
   const [isLogged, setIsLogged] = useState(!!parseCookies()['auth_token']);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(parseCookies()['role'] === 'admin');
 
   return (
     <BrowserRouter>
