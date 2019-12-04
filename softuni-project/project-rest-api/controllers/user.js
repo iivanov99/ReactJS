@@ -38,8 +38,6 @@ module.exports = {
       }
     },
     login: async (req, res, next) => {
-      console.log('login req called');
-      
       try {
         const { email, password } = req.body;
 
