@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import Posts from '../Posts';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
+
+import Posts from '../Posts';
+import postService from '../../../services/post-service';
+
 import './CreatePost.css';
 
 const schema = yup.object().shape({
@@ -11,15 +14,17 @@ const schema = yup.object().shape({
     .max(250, 'Description must not exceed 250 symbols!')
 });
 
-const CreatePost = () => {
+const CreatePost = ({ history }) => {
 
   const [description, setDescription] = useState('');
 
   const handleClick = async () => {
     try {
       await schema.validate({ description }, { abortEarly: false });
+      await postService.create({ description });
+      history.push('/');
       toast.dismiss();
-      toast.success('Input is correct!');
+      toast.success('Your post was successfully created!');
     } catch (err) {
       toast.dismiss();
       err.inner.forEach(innerErr => toast.error(innerErr.message));
