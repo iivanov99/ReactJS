@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,7 @@ const CreatePost = ({ history }) => {
 
   const [description, setDescription] = useState('');
 
-  const handleClick = async () => {
+  const handleClick = useCallback(async () => {
     try {
       await schema.validate({ description }, { abortEarly: false });
       await postService.create({ description });
@@ -29,7 +29,7 @@ const CreatePost = ({ history }) => {
       toast.dismiss();
       err.inner.forEach(innerErr => toast.error(innerErr.message));
     }
-  };
+  }, [description, history])
 
   return (
     <div className="Input">
