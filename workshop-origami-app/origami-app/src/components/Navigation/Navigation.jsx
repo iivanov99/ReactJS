@@ -9,7 +9,8 @@ import { toast } from 'react-toastify';
 
 const Navigation = ({ isLogged, setIsLogged }) => {
 
-  const handleLogoutClick = async () => {
+  const handleLogoutClick = async (ev) => {
+    ev.preventDefault();
     await userService.logout();
     setIsLogged(false);
     toast.dismiss();

@@ -37,10 +37,10 @@ const App = () => {
           <Aside />
           <Switch>
             <Route path="/" exact component={Main} />
-            <Route path="/posts/create" component={CreatePost} />
-            <Route path="/user/register" component={Register} />
-            <Route path="/user/login" render={(props) => <Login {...props} setIsLogged={setIsLogged} />} />
-            <Route path="/user/profile" component={Profile} />
+            {isLogged ? (<Route path="/posts/create" component={CreatePost} />) : null}
+            {!isLogged ? (<Route path="/user/register" component={Register} />) : null}
+            {!isLogged ? (<Route path="/user/login" render={(props) => <Login {...props} setIsLogged={setIsLogged} />} />) : null}
+            {isLogged ? (<Route path="/user/profile" component={Profile} />) : null}
             <Route component={PageNotFound} />
           </Switch>
         </div>
