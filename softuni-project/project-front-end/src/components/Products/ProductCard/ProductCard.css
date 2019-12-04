@@ -51,3 +51,7 @@
   height: 335px;
   width: 390px;
 }
+
+.delete-btn {
+  margin-left: 10px;
+}

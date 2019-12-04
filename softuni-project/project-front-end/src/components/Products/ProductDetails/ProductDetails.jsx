@@ -5,7 +5,7 @@ import apparelService from '../../../services/apparel-service';
 import cartService from '../../../services/cart-service';
 import './ProductDetails.css';
 
-const ProductDetails = ({ match, history }) => {
+const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
 
   const [product, setProduct] = useState({});
 
@@ -52,8 +52,13 @@ const ProductDetails = ({ match, history }) => {
             <p><span className="bolder-text">Size</span>: {product.size}</p>
             <p><span className="bolder-text">Ordered: </span> {product.ordersCount} times</p>
             <p><span className="bolder-text">Price: </span><br /> <span className="span-price">${product.price}</span></p>
-            <Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>
-
+            {isLogged && !isAdmin ? (<Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
+            {isLogged && isAdmin ? (
+              <Fragment>
+                <Link onClick={handleClick} to="" className="btn card-btn">Edit</Link>
+                <Link onClick={handleClick} to="" className="btn card-btn delete-btn">Delete</Link>
+              </Fragment>
+            ) : null}
           </div>
         </div>
         <div className="col"></div>

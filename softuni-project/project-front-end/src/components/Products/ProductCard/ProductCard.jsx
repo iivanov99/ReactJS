@@ -25,11 +25,11 @@ const ProductCard = ({ apparelType, id, name, imageUrl, description, price, isLo
             <div className="card-info">
               <p>Price: <br></br> <span className="span-price">${price}</span></p>
               <div className="card-buttons">
-                {/* {isLogged && !isAdmin ? (<Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>) : null} */}
-                {isLogged ? (
+                {isLogged && !isAdmin ? (<Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
+                {isLogged && isAdmin ? (
                   <Fragment>
                     <Link onClick={handleClick} to="" className="btn card-btn">Edit</Link>
-                    <Link onClick={handleClick} to="" className="btn card-btn">Delete</Link>
+                    <Link onClick={handleClick} to="" className="btn card-btn delete-btn">Delete</Link>
                   </Fragment>
                 ) : null}
               </div>

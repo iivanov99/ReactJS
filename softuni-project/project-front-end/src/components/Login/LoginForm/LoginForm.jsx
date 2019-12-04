@@ -27,7 +27,6 @@ const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
       const user = await userService.login({ email, password });
       setIsLogged(true);
       setIsAdmin(user.role === 'admin');
-      document.cookie = `role=${user.role === 'admin' ? 'admin' : 'user'}`;
       history.push('/');
       toast.dismiss();
       toast.success('Logged in successfuly!');
