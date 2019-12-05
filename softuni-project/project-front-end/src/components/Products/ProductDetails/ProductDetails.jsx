@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import apparelService from '../../../services/apparel-service';
@@ -10,23 +10,23 @@ const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    (async () => {
       const apparelType = match.path.split('/')[2];
       const apparelId = match.params.id;
       setProduct(await apparelService.loadOne(apparelType, apparelId));
-    };
-    fetchProduct();
+    })();
   }, [match.params.id, match.path]);
+
+  const handleAddToCartClick = useCallback(async (ev) => {
+    ev.preventDefault();
+    await cartService.addToCart({ name: product.name, price: product.price });
+    history.push('/user/cart');
+    toast.success('Item successfully added to your cart!');
+  }, [history, product.name, product.price]);
 
   if (!Object.keys(product).length) {
     return (<div className="loading-div"></div>);
   }
-
-  const handleClick = async () => {
-    await cartService.addToCart({ name: product.name, price: product.price });
-    history.push('/user/cart');
-    toast.success('Item successfully added to your cart!');
-  };
 
   return (
     <Fragment>
@@ -52,11 +52,11 @@ const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
             <p><span className="bolder-text">Size</span>: {product.size}</p>
             <p><span className="bolder-text">Ordered: </span> {product.ordersCount} times</p>
             <p><span className="bolder-text">Price: </span><br /> <span className="span-price">${product.price}</span></p>
-            {isLogged && !isAdmin ? (<Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
+            {isLogged && !isAdmin ? (<Link onClick={handleAddToCartClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
             {isLogged && isAdmin ? (
               <Fragment>
-                <Link onClick={handleClick} to="" className="btn card-btn">Edit</Link>
-                <Link onClick={handleClick} to="" className="btn card-btn delete-btn">Delete</Link>
+                <Link to="" className="btn card-btn">Edit</Link>
+                <Link to="" className="btn card-btn delete-btn">Delete</Link>
               </Fragment>
             ) : null}
           </div>

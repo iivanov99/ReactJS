@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -7,11 +7,11 @@ import './CartItem.css';
 
 const CartItem = ({ _id, item, price, date, setCartItems }) => {
 
-  const handleRemoveClick = async () => {
+  const handleRemoveClick = useCallback(async () => {
     await cartService.deleteFromCart(_id);
     setCartItems(await cartService.loadAll());
     toast.success(`${item} removed from the cart`);
-  };
+  }, [_id, item, setCartItems]);
 
   return (
     <tr>

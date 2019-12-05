@@ -6,19 +6,17 @@ const MenApparel = ({ history, isLogged, isAdmin }) => {
 
   const [menApparel, setMenApparel] = useState([]);
 
-  const fetchMenApparel = async () => {
-    setMenApparel(await apparelService.loadAll('men'));
-  };
-
   useEffect(() => {
-    fetchMenApparel();
+    (async () => {
+      setMenApparel(await apparelService.loadAll('men'));
+    })();
   }, []);
 
   return (
     <Fragment>
       {menApparel.length ? (
         <ApparelSection sectionName="Men" apparel={menApparel} apparelType="men"
-        history={history} isLogged={isLogged} isAdmin={isAdmin} />
+          history={history} isLogged={isLogged} isAdmin={isAdmin} />
       ) : (
         <div className="loading-div"></div>
       )}

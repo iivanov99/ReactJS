@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import userService from '../../../services/user-service';
@@ -19,7 +19,8 @@ const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleFormSubmit = async (ev) => {
+  const handleFormSubmit = useCallback(async (ev) => {
+    debugger;
     ev.preventDefault();
 
     try {
@@ -42,7 +43,7 @@ const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
         toast.error('Invalid email or password!');
       }
     }
-  };
+  }, [email, history, password, setIsAdmin, setIsLogged]);
 
   return (
     <div className="row row-dark-grey row-login">

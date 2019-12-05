@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import userService from '../../../services/user-service';
@@ -28,7 +28,7 @@ const RegisterForm = ({ history }) => {
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
 
-  const handleFormSubmit = async (ev) => {
+  const handleFormSubmit = useCallback(async (ev) => {
     ev.preventDefault();
 
     try {
@@ -47,7 +47,7 @@ const RegisterForm = ({ history }) => {
 
       toast.error(err.message);
     }
-  };
+  }, [email, history, password, rePassword, username]);
 
   return (
     <div className="row row-dark-grey row-register">

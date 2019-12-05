@@ -9,20 +9,17 @@ const MostPopularSection = ({ isLogged, isAdmin, history }) => {
   const [womenApparel, setWomenApparel] = useState([]);
   const [accessories, setAccessories] = useState([]);
 
-  const fetchApparel = async () => {
-    const [men, women, acc] = await Promise.all([
-      apparelService.loadAll('men', 4),
-      apparelService.loadAll('women', 4),
-      apparelService.loadAll('accessories', 4)
-    ]);
-
-    setMenApparel(men);
-    setWomenApparel(women);
-    setAccessories(acc);
-  };
-
   useEffect(() => {
-    fetchApparel();
+    (async () => {
+      const [men, women, acc] = await Promise.all([
+        apparelService.loadAll('men', 4),
+        apparelService.loadAll('women', 4),
+        apparelService.loadAll('accessories', 4)
+      ]);
+      setMenApparel(men);
+      setWomenApparel(women);
+      setAccessories(acc);
+    })();
   }, []);
 
   return (

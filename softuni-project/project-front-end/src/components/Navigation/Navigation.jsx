@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import userService from '../../services/user-service';
@@ -7,13 +7,13 @@ import { toast } from 'react-toastify';
 
 const Navigation = ({ isLogged, isAdmin, setIsLogged, setIsAdmin }) => {
 
-  const handleLogoutClick = async () => {
+  const handleLogoutClick = useCallback(async () => {
     await userService.logout();
     setIsLogged(false);
     setIsAdmin(false);
     toast.dismiss();
     toast.success('Logged out successfuly!');
-  };
+  }, [setIsAdmin, setIsLogged]);
 
   return (
     <Fragment>

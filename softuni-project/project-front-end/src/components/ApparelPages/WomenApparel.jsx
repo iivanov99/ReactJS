@@ -6,12 +6,10 @@ const WomenApparel = ({ history, isLogged, isAdmin }) => {
 
   const [womenApparel, setWomenApparel] = useState([]);
 
-  const fetchWomenApparel = async () => {
-    setWomenApparel(await apparelService.loadAll('women'));
-  };
-
   useEffect(() => {
-    fetchWomenApparel();
+    (async () => {
+      setWomenApparel(await apparelService.loadAll('women'));
+    })();
   }, []);
 
   return (

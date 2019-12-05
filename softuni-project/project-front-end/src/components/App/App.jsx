@@ -53,8 +53,10 @@ const App = () => {
           <Route path="/apparel/accessories/:id" render={props => <ProductDetails {...props} isLogged={isLogged} isAdmin={isAdmin} />} />
           <Route path="/apparel/accessories" render={props => <Accessories {...props} isLogged={isLogged} isAdmin={isAdmin} />} />
 
-          <Route path="/user/login" render={props => <Login {...props} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />} />
-          <Route path="/user/register" component={Register} />
+          {!isLogged && !isAdmin ? (
+            <Route path="/user/login" render={props => <Login {...props} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />} />
+          ) : null}
+          {!isLogged && !isAdmin ? (<Route path="/user/register" component={Register} />) : null}
 
           {isLogged && !isAdmin ? (<Route path="/user/orders" component={UserOrders} />) : null}
           {isLogged && !isAdmin ? (<Route path="/user/cart" component={CartItems} />) : null}
