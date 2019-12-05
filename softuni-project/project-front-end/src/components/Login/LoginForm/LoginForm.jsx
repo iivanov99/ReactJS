@@ -20,7 +20,6 @@ const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
   const [password, setPassword] = useState('');
 
   const handleFormSubmit = useCallback(async (ev) => {
-    debugger;
     ev.preventDefault();
 
     try {

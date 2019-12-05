@@ -1,18 +1,37 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+
 import cartService from '../../../services/cart-service';
+import apparelService from '../../../services/apparel-service';
+
 import './ProductCard.css';
 
-const ProductCard = ({ apparelType, id, name, imageUrl, description, price, isLogged, isAdmin, history }) => {
+const ProductCard = ({ apparelType, id, name, imageUrl, description, price, isLogged, isAdmin, history, setApparel, forMainPage }) => {
 
-  const handleClick = async (ev) => {
+  const handleAddToCartClick = useCallback(async (ev) => {
     ev.preventDefault();
     await cartService.addToCart({ name, price });
     history.push('/user/cart');
     toast.success(`${name} successfully added to your cart!`);
-  };
+  }, [history, name, price]);
+
+  const handleDeleteClick = useCallback(async (ev) => {
+    ev.preventDefault();
+    await apparelService.delete(apparelType, id);
+
+    if (forMainPage) {
+      setApparel(await apparelService.loadAll(apparelType, 4));
+      history.push(`/`);
+    } else {
+      setApparel(await apparelService.loadAll(apparelType));
+      history.push(`/apparel/${apparelType}`);
+    }
+
+    toast.dismiss();
+    toast.success(`${name} deleted successfully!`);
+  }, [apparelType, forMainPage, history, id, name, setApparel]);
 
   return (
     <Fragment>
@@ -25,11 +44,11 @@ const ProductCard = ({ apparelType, id, name, imageUrl, description, price, isLo
             <div className="card-info">
               <p>Price: <br></br> <span className="span-price">${price}</span></p>
               <div className="card-buttons">
-                {isLogged && !isAdmin ? (<Link onClick={handleClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
+                {isLogged && !isAdmin ? (<Link onClick={handleAddToCartClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
                 {isLogged && isAdmin ? (
                   <Fragment>
-                    <Link onClick={handleClick} to="" className="btn card-btn">Edit</Link>
-                    <Link onClick={handleClick} to="" className="btn card-btn delete-btn">Delete</Link>
+                    <Link to={`/apparel/edit/${apparelType}/${id}`} className="btn card-btn">Edit</Link>
+                    <Link to="" onClick={handleDeleteClick} className="btn card-btn delete-btn">Delete</Link>
                   </Fragment>
                 ) : null}
               </div>

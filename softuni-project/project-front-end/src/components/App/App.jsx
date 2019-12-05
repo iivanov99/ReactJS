@@ -18,6 +18,7 @@ import CreateMens from '../CreateForms/CreateMens';
 import CreateWomens from '../CreateForms/CreateWomens';
 import CreateAccessories from '../CreateForms/CreateAccessories';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import EditApparel from '../EditPages/EditApparel';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -62,9 +63,14 @@ const App = () => {
           {isLogged && !isAdmin ? (<Route path="/user/cart" component={CartItems} />) : null}
 
           {isLogged && isAdmin ? (<Route path="/admin/pending-orders" component={PendingOrders} />) : null}
+
           {isLogged && isAdmin ? (<Route path="/apparel/create/men" component={CreateMens} />) : null}
           {isLogged && isAdmin ? (<Route path="/apparel/create/women" component={CreateWomens} />) : null}
           {isLogged && isAdmin ? (<Route path="/apparel/create/accessories" component={CreateAccessories} />) : null}
+
+          {isLogged && isAdmin ? (<Route path="/apparel/edit/men/:id" component={EditApparel} />) : null}
+          {isLogged && isAdmin ? (<Route path="/apparel/edit/women/:id" component={EditApparel} />) : null}
+          {isLogged && isAdmin ? (<Route path="/apparel/edit/accessories/:id" component={EditApparel} />) : null}
 
           <Route component={PageNotFound} />
         </Switch>

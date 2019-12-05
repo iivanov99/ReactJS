@@ -3,7 +3,7 @@ import ProductList from '../../Products/ProductList';
 import ApparelSectionHeading from './ApparelSectionHeading';
 import './ApparelSection.css';
 
-const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, isAdmin }) => {
+const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, isAdmin, setApparel }) => {
 
   const [searchValue, setSearchValue] = useState('');
   const [apparelToDisplay, setApparelToDisplay] = useState(apparel);
@@ -25,7 +25,8 @@ const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, 
         </div>
       </div>
       <ProductList apparel={apparelToDisplay} apparelType={apparelType}
-        isAdmin={isAdmin} isLogged={isLogged} history={history} />
+        isAdmin={isAdmin} isLogged={isLogged} history={history}
+        setApparel={setApparelToDisplay} forMainPage={false} />
     </Fragment>
   );
 };

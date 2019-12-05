@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 import apparelService from '../../../services/apparel-service';
 
-import './CreateForm.css';
+import './EditForm.css';
 
 const schema = yup.object().shape({
   name: yup.string()
@@ -24,24 +24,24 @@ const schema = yup.object().shape({
     .required('Price is required!')
 });
 
-const CreateForm = ({ formName, categoryOptions, history }) => {
+const EditForm = ({ formName, categoryOptions, history, apparel }) => {
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [size, setSize] = useState('XS');
-  const [category, setCategory] = useState('Choose category');
-  const [price, setPrice] = useState('');
+  const [name, setName] = useState(apparel.name);
+  const [description, setDescription] = useState(apparel.description);
+  const [imageUrl, setImageUrl] = useState(apparel.imageUrl);
+  const [size, setSize] = useState(apparel.size);
+  const [category, setCategory] = useState(apparel.category);
+  const [price, setPrice] = useState(apparel.price);
 
   const formSubmitHandler = async (ev) => {
     ev.preventDefault();
 
     try {
       await schema.validate({ name, description, imageUrl, category, price: +price }, { abortEarly: false });
-      await apparelService.create(formName, { name, description, imageUrl, category, price, size });
+      await apparelService.edit(formName, apparel._id, { name, description, imageUrl, size, category, price });
       history.push(`/apparel/${formName.toLowerCase()}`);
       toast.dismiss();
-      toast.success(`${name} successfuly created!`);
+      toast.success(`${name} successfuly edited!`);
     } catch (err) {
       toast.dismiss();
 
@@ -56,7 +56,7 @@ const CreateForm = ({ formName, categoryOptions, history }) => {
     <Fragment>
       <div className="row row-dark-grey">
         <div className="col-md-12">
-          <form onSubmit={formSubmitHandler} className="create-form">
+          <form onSubmit={formSubmitHandler} className="edit-form">
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input onChange={ev => setName(ev.target.value)} value={name} className="form-control"
@@ -97,7 +97,7 @@ const CreateForm = ({ formName, categoryOptions, history }) => {
                   type="number" placeholder="Price" />
               </div>
             </div>
-            <button type="submit" className="btn form-btn create-btn">Create</button>
+            <button type="submit" className="btn form-btn edit-btn">Edit</button>
           </form>
         </div>
       </div>
@@ -105,4 +105,4 @@ const CreateForm = ({ formName, categoryOptions, history }) => {
   );
 };
 
-export default CreateForm;
+export default EditForm;

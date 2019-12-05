@@ -16,10 +16,10 @@ const Accessories = ({ history, isLogged, isAdmin }) => {
     <Fragment>
       {accessories.length ? (
         <ApparelSection sectionName="Accessories" apparel={accessories} apparelType="accessories"
-          history={history} isLogged={isLogged} isAdmin={isAdmin} />
+          history={history} isLogged={isLogged} isAdmin={isAdmin} setApparel={setAccessories} />
       ) : (
-          <div className="loading-div"></div>
-        )}
+        <div className="loading-div"></div>
+      )}
     </Fragment>
   );
 };

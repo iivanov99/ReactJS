@@ -1,21 +1,23 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import apparelService from '../../../services/apparel-service';
 import cartService from '../../../services/cart-service';
+
 import './ProductDetails.css';
 
 const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
 
+  const apparelType = match.path.split('/')[2];
+  const apparelId = match.params.id;
   const [product, setProduct] = useState({});
 
   useEffect(() => {
     (async () => {
-      const apparelType = match.path.split('/')[2];
-      const apparelId = match.params.id;
       setProduct(await apparelService.loadOne(apparelType, apparelId));
     })();
-  }, [match.params.id, match.path]);
+  }, [apparelId, apparelType, match.params.id, match.path]);
 
   const handleAddToCartClick = useCallback(async (ev) => {
     ev.preventDefault();
@@ -23,6 +25,16 @@ const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
     history.push('/user/cart');
     toast.success('Item successfully added to your cart!');
   }, [history, product.name, product.price]);
+
+  const handleDeleteClick = useCallback(async (ev) => {
+    ev.preventDefault();
+    const apparelType = match.path.split('/')[2];
+    const apparelId = match.params.id;
+    await apparelService.delete(apparelType, apparelId);
+    history.push(`/apparel/${apparelType}`);
+    toast.dismiss();
+    toast.success(`${product.name} deleted successfuly!`);
+  }, [history, match.params.id, match.path, product.name]);
 
   if (!Object.keys(product).length) {
     return (<div className="loading-div"></div>);
@@ -51,12 +63,12 @@ const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
             <p><span className="bolder-text">Category:</span> {product.category}</p>
             <p><span className="bolder-text">Size</span>: {product.size}</p>
             <p><span className="bolder-text">Ordered: </span> {product.ordersCount} times</p>
-            <p><span className="bolder-text">Price: </span><br /> <span className="span-price">${product.price}</span></p>
+            <p><span className="bolder-text">Price: </span><br /><span className="span-price">${product.price}</span></p>
             {isLogged && !isAdmin ? (<Link onClick={handleAddToCartClick} to="" className="btn card-btn">Add to Cart</Link>) : null}
             {isLogged && isAdmin ? (
               <Fragment>
-                <Link to="" className="btn card-btn">Edit</Link>
-                <Link to="" className="btn card-btn delete-btn">Delete</Link>
+                <Link to={`/apparel/edit/${apparelType}/${product._id}`} className="btn card-btn">Edit</Link>
+                <Link to="" onClick={handleDeleteClick} className="btn card-btn delete-btn">Delete</Link>
               </Fragment>
             ) : null}
           </div>

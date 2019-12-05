@@ -31,16 +31,16 @@ const MostPopularSection = ({ isLogged, isAdmin, history }) => {
       </div>
 
       <ApparelHeading name="Men Apparel" />
-      <ProductList apparel={menApparel} apparelType="men"
-        isLogged={isLogged} isAdmin={isAdmin} history={history} />
+      <ProductList apparel={menApparel} apparelType="men" setApparel={setMenApparel}
+        isLogged={isLogged} isAdmin={isAdmin} history={history} forMainPage={true} />
 
       <ApparelHeading name="Women Apparel" />
-      <ProductList apparel={womenApparel} apparelType="women"
-        isLogged={isLogged} isAdmin={isAdmin} history={history} />
+      <ProductList apparel={womenApparel} apparelType="women" setApparel={setWomenApparel}
+        isLogged={isLogged} isAdmin={isAdmin} history={history} forMainPage={true} />
 
       <ApparelHeading name="Accessories" />
-      <ProductList apparel={accessories} apparelType="accessories"
-        isLogged={isLogged} isAdmin={isAdmin} history={history} />
+      <ProductList apparel={accessories} apparelType="accessories" setApparel={setAccessories}
+        isLogged={isLogged} isAdmin={isAdmin} history={history} forMainPage={true} />
     </Fragment>
   );
 };
