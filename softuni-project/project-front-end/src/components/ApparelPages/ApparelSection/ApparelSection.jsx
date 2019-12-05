@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useCallback } from 'react';
 import ProductList from '../../Products/ProductList';
 import ApparelSectionHeading from './ApparelSectionHeading';
 import './ApparelSection.css';
@@ -8,12 +8,12 @@ const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, 
   const [searchValue, setSearchValue] = useState('');
   const [apparelToDisplay, setApparelToDisplay] = useState(apparel);
 
-  const handleSearchInputChange = (ev) => {
+  const handleSearchInputChange = useCallback(ev => {
     const searchedApparel = apparel.filter(apparelItem =>
       apparelItem.name.toLowerCase().includes(ev.target.value.toLowerCase()))
     setSearchValue(ev.target.value);
     setApparelToDisplay(searchedApparel);
-  };
+  }, [apparel]);
 
   return (
     <Fragment>

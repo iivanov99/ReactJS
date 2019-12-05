@@ -1,0 +1,7 @@
+.row-not-found {
+  min-height: calc(100vh - 296px);
+}
+
+.col-not-found {
+  padding-left: 40px;
+}

@@ -17,6 +17,7 @@ import PendingOrders from '../PendingOrders/PendingOrders';
 import CreateMens from '../CreateForms/CreateMens';
 import CreateWomens from '../CreateForms/CreateWomens';
 import CreateAccessories from '../CreateForms/CreateAccessories';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -55,13 +56,15 @@ const App = () => {
           <Route path="/user/login" render={props => <Login {...props} setIsLogged={setIsLogged} setIsAdmin={setIsAdmin} />} />
           <Route path="/user/register" component={Register} />
 
-          <Route path="/user/orders" component={UserOrders} />
-          <Route path="/user/cart" component={CartItems} />
+          {isLogged && !isAdmin ? (<Route path="/user/orders" component={UserOrders} />) : null}
+          {isLogged && !isAdmin ? (<Route path="/user/cart" component={CartItems} />) : null}
 
-          <Route path="/admin/pending-orders" component={PendingOrders} />
-          <Route path="/apparel/create/men" component={CreateMens} />
-          <Route path="/apparel/create/women" component={CreateWomens} />
-          <Route path="/apparel/create/accessories" component={CreateAccessories} />
+          {isLogged && isAdmin ? (<Route path="/admin/pending-orders" component={PendingOrders} />) : null}
+          {isLogged && isAdmin ? (<Route path="/apparel/create/men" component={CreateMens} />) : null}
+          {isLogged && isAdmin ? (<Route path="/apparel/create/women" component={CreateWomens} />) : null}
+          {isLogged && isAdmin ? (<Route path="/apparel/create/accessories" component={CreateAccessories} />) : null}
+
+          <Route component={PageNotFound} />
         </Switch>
         <Footer />
       </div>
