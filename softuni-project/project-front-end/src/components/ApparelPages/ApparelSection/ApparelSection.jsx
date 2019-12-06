@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useCallback } from 'react';
+
 import ProductList from '../../Products/ProductList';
 import ApparelSectionHeading from './ApparelSectionHeading';
+
 import './ApparelSection.css';
 
 const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, isAdmin, setApparel }) => {

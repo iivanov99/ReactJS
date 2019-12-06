@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
 import cartService from '../../../services/cart-service';
 import './CartItem.css';
 

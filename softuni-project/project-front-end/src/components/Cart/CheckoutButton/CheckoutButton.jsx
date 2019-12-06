@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import cartService from '../../../services/cart-service';
 
 import './CheckoutButton.css';
-import { toast } from 'react-toastify';
 
 const CheckoutButton = ({ cartItems, history }) => {
 

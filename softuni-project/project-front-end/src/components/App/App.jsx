@@ -14,11 +14,11 @@ import HomePage from '../HomePage/HomePage';
 import UserOrders from '../UserOrders/UserOrders';
 import CartItems from '../Cart/CartItems';
 import PendingOrders from '../PendingOrders/PendingOrders';
-import CreateMens from '../CreateForms/CreateMens';
-import CreateWomens from '../CreateForms/CreateWomens';
-import CreateAccessories from '../CreateForms/CreateAccessories';
+import CreateMens from '../CreatePages/CreateMens';
+import CreateWomens from '../CreatePages/CreateWomens';
+import CreateAccessories from '../CreatePages/CreateAccessories';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import EditApparel from '../EditPages/EditApparel';
+import EditApparel from '../EditApparel/EditApparel';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
