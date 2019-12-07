@@ -1,43 +1,34 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AuthContext } from '../ContextWrapper/ContextWrapper';
 import data from '../../data';
 
-class ProductDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: {}
-    }
-  }
+const ProductDetails = ({ match }) => {
 
-  componentDidMount() {
-    const product = data.find(item =>
-      item.id === Number(this.props.match.params.id));
-    this.setState({ product });
-  }
+  const [product, setProduct] = useState({});
+  const authContext = useContext(AuthContext);
 
-  render() {
-    const { product } = this.state;
+  useEffect(() => {
+    const product = data.find(item => item.id === Number(match.params.id));
+    setProduct(product);
+  }, [match.params.id]);
 
-    if (!Object.keys(product).length) {
-      return (
+  return (
+    <Fragment>
+      {!Object.keys(product).length ? (
         <div>Loading...</div>
-      )
-    }
-
-    return (
-      <Fragment>
+      ) : (
         <div>
           Product Page - {product.title}
           <div>
-            <Link to="/">
-              Go back to homepage
-          </Link>
+            <Link to="/">Go back to homepage</Link>
           </div>
+          <p>Authenticated: {`${authContext.auth}`}</p>
         </div>
-      </Fragment>
-    )
-  }
+      )}
+    </Fragment>
+  )
 }
 
 export default ProductDetails;

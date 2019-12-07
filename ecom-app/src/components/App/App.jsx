@@ -4,18 +4,21 @@ import ProductList from '../ProductList/ProductList';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Header from '../Header/Header';
+import ContextWrapper from '../ContextWrapper/ContextWrapper';
 
 const App = (props) => {
   return (
     <Fragment>
-      <Header />
-      <Router>
-        <Switch>
-          <Route path="/" exact component={ProductList} />
-          <Route path="/product/:id" component={ProductDetails} />
-          <Route component={ErrorPage} />
-        </Switch>
-      </Router>
+      <ContextWrapper>
+        <Header />
+        <Router>
+          <Switch>
+            <Route path="/" exact component={ProductList} />
+            <Route path="/product/:id" component={ProductDetails} />
+            <Route component={ErrorPage} />
+          </Switch>
+        </Router>
+      </ContextWrapper>
     </Fragment>
   );
 };
