@@ -34,9 +34,9 @@ module.exports = {
     editApparel: async (req, res, next) => {
       try {
         const { id } = req.params;
-        const { name, category, price, description, size, imageUrl, ordersCount } = req.body;
+        const { name, category, price, description, size, imageUrl } = req.body;
         const updatedWomenApparel = await models.WomenApparel
-          .updateOne({ _id: id }, { name, category, price, description, size, imageUrl, ordersCount });
+          .updateOne({ _id: id }, { name, category, price, description, size, imageUrl });
         res.json(updatedWomenApparel);
       } catch (err) {
         next(err);

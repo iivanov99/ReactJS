@@ -30,7 +30,7 @@ const EditApparel = ({ match, history }) => {
       ) : null}
       {apparelType === 'women' ? (
         <EditForm formName="Women" history={history} apparel={apparel}
-          categoryOptions={['Leggings', 'Shorts', 'Long Sleeve Shirt', 'Top', 'Bra', 'Hoodie', 'Crop Hoodie', 'Tank', 'Other']} />
+          categoryOptions={['Leggings', 'Shorts', 'Long Sleeve Shirt', 'Top', 'Bra', 'Hoodie', 'Crop Hoodie', 'Tank', 'Suit', 'Other']} />
       ) : null}
       {apparelType === 'accessories' ? (
         <EditForm formName="Accessories" history={history} apparel={apparel}

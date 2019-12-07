@@ -7,7 +7,7 @@ const CreateMens = ({ history }) => {
     <Fragment>
       <CreateFormHeading formName="Women" />
       <CreateForm formName="Women"
-        categoryOptions={['Leggings', 'Shorts', 'Long Sleeve Shirt', 'Top', 'Bra', 'Hoodie', 'Crop Hoodie', 'Tank', 'Other']}
+        categoryOptions={['Leggings', 'Shorts', 'Long Sleeve Shirt', 'Top', 'Bra', 'Hoodie', 'Crop Hoodie', 'Tank', 'Suit', 'Other']}
         history={history} />
     </Fragment>
   );

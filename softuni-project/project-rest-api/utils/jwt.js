@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
   createToken: (data) => {
     return new Promise((resolve, reject) => {
-      jwt.sign(data, config.jwtSecret, { expiresIn: '30m' }, (err, accessToken) => {
+      jwt.sign(data, config.jwtSecret, { expiresIn: '1h' }, (err, accessToken) => {
         if (err) { reject(err); return; }
         resolve(accessToken);
       });
