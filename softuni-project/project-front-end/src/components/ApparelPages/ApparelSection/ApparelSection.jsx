@@ -5,14 +5,14 @@ import ApparelSectionHeading from './ApparelSectionHeading';
 
 import './ApparelSection.css';
 
-const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, isAdmin, setApparel }) => {
+const ApparelSection = ({ apparelType, apparel, setApparel, history, isLogged, isAdmin }) => {
 
   const [searchValue, setSearchValue] = useState('');
   const [apparelToDisplay, setApparelToDisplay] = useState(apparel);
 
   const handleSearchInputChange = useCallback(ev => {
     const searchedApparel = apparel.filter(apparelItem =>
-      apparelItem.name.toLowerCase().includes(ev.target.value.toLowerCase()))
+      apparelItem.name.toLowerCase().includes(ev.target.value.toLowerCase()));
     setSearchValue(ev.target.value);
     setApparelToDisplay(searchedApparel);
   }, [apparel]);
@@ -20,7 +20,7 @@ const ApparelSection = ({ sectionName, apparel, apparelType, history, isLogged, 
   return (
     <Fragment>
       <div className="row row-silver">
-        <ApparelSectionHeading name={sectionName} />
+        <ApparelSectionHeading name={apparelType.charAt(0).toUpperCase() + apparelType.slice(1)} />
         <div className="col-md-6 col-search">
           <input className="apparel-search" onChange={handleSearchInputChange}
             type="search" placeholder="Search..." value={searchValue} />

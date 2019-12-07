@@ -15,7 +15,7 @@ const WomenApparel = ({ history, isLogged, isAdmin }) => {
   return (
     <Fragment>
       {womenApparel.length ? (
-        <ApparelSection sectionName="Women" apparel={womenApparel} apparelType="women"
+        <ApparelSection apparelType="women" apparel={womenApparel} setApparel={setWomenApparel}
           history={history} isLogged={isLogged} isAdmin={isAdmin} />
       ) : (
         <div className="loading-div"></div>

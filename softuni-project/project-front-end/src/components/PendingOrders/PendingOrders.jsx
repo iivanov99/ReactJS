@@ -5,7 +5,7 @@ import PendingOrdersHeading from './PendingOrdersHeading';
 import PendingOrder from './PendingOrder/PendingOrder';
 import orderService from '../../services/order-service';
 
-const PendingOrders = ({ history }) => {
+const PendingOrders = () => {
 
   const [pendingOrders, setPendingOrders] = useState([]);
 
