@@ -11,19 +11,12 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import PageNotFound from '../PageNotFount/PageNotFound';
+import parseCookies from '../../utils/parse-cookies';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 toast.configure();
-
-const parseCookies = () => {
-  return document.cookie.split('; ').reduce((acc, cookie) => {
-    const [cookieName, cookieValue] = cookie.split('=');
-    acc[cookieName] = cookieValue;
-    return acc;
-  }, {});
-};
 
 const App = () => {
 

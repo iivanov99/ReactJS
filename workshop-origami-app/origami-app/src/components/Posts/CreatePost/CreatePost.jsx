@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import * as yup from 'yup';
-import { toast } from 'react-toastify';
 
 import Posts from '../Posts';
 import postService from '../../../services/post-service';
+import redirectWithNotification from '../../../utils/redirect-with-notification';
+import handleErrors from '../../../utils/handle-errors';
 
 import './CreatePost.css';
 
@@ -22,12 +23,9 @@ const CreatePost = ({ history }) => {
     try {
       await schema.validate({ description }, { abortEarly: false });
       await postService.create({ description });
-      history.push('/');
-      toast.dismiss();
-      toast.success('Your post was successfully created!');
+      redirectWithNotification(history, '/', 'Your post was successfully created!');
     } catch (err) {
-      toast.dismiss();
-      err.inner.forEach(innerErr => toast.error(innerErr.message));
+      handleErrors(err);
     }
   }, [description, history])
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import Link from '../Link/Link';
 import logo from '../../images/white-origami-bird.png';
@@ -9,13 +9,13 @@ import { toast } from 'react-toastify';
 
 const Navigation = ({ isLogged, setIsLogged }) => {
 
-  const handleLogoutClick = async (ev) => {
+  const handleLogoutClick = useCallback(async (ev) => {
     ev.preventDefault();
     await userService.logout();
     setIsLogged(false);
     toast.dismiss();
     toast.success('Logged out successfuly!');
-  };
+  }, [setIsLogged]);
 
   return (
     <nav className="Navigation">

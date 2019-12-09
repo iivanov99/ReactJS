@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { toast } from 'react-toastify';
+
 import userService from '../../services/user-service';
+import redirectWithNotification from '../../utils/redirect-with-notification';
+import handleErrors from '../../utils/handle-errors';
+
 import './Register.css';
 
 const schema = yup.object().shape({
@@ -29,12 +32,9 @@ const Register = ({ history }) => {
     try {
       await schema.validate({ username, password, rePassword }, { abortEarly: false });
       await userService.register({ username, password });
-      history.push('/user/login');
-      toast.dismiss();
-      toast.success('Registered successfully!');
+      redirectWithNotification(history, '/user/login', 'Registered successfully!');
     } catch (err) {
-      toast.dismiss();
-      err.inner.forEach(innerErr => toast.error(innerErr.message));
+      handleErrors();
     }
   };
 

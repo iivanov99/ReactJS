@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import * as yup from 'yup';
-import { toast } from 'react-toastify';
+
 import userService from '../../services/user-service';
+import redirectWithNotification from '../../utils/redirect-with-notification';
+import handleErrors from '../../utils/handle-errors';
+
 import './Login.css';
 
 const schema = yup.object().shape({
@@ -19,31 +22,18 @@ const Login = ({ setIsLogged, history }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleFormSubmit = async (ev) => {
+  const handleFormSubmit = useCallback(async (ev) => {
     ev.preventDefault();
 
     try {
       await schema.validate({ username, password }, { abortEarly: false });
       await userService.login({ username, password });
-
       setIsLogged(true);
-      history.push('/');
-
-      toast.dismiss();
-      toast.success('Logged in successfuly!');
+      redirectWithNotification(history, '/', 'Logged in successfully!');
     } catch (err) {
-      toast.dismiss();
-
-      if (err.inner) {
-        err.inner.forEach(innerErr => toast.error(innerErr.message));
-        return;
-      }
-
-      if (err.message === 'Unauthorized') {
-        toast.error('Invalid username or password!');
-      }
+      handleErrors(err);
     }
-  };
+  }, [history, password, setIsLogged, username]);
 
   return (
     <div className="Login">
