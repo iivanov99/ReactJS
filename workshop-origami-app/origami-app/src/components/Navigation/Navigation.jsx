@@ -1,21 +1,24 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import Link from '../Link/Link';
 import logo from '../../images/white-origami-bird.png';
 import userService from '../../services/user-service';
+import { UserContext } from '../ContextWrapper/ContextWrapper';
 
 import './Navigation.css';
 import { toast } from 'react-toastify';
 
-const Navigation = ({ isLogged, setIsLogged }) => {
+const Navigation = () => {
+
+  const { isLogged, setUser } = useContext(UserContext);
 
   const handleLogoutClick = useCallback(async (ev) => {
     ev.preventDefault();
     await userService.logout();
-    setIsLogged(false);
+    setUser(null);
     toast.dismiss();
     toast.success('Logged out successfuly!');
-  }, [setIsLogged]);
+  }, [setUser]);
 
   return (
     <nav className="Navigation">

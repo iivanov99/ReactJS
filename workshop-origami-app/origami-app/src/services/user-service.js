@@ -31,6 +31,21 @@ const userService = {
       credentials: 'include'
     });
     return res.text();
+  },
+  isAuth: async () => {
+    const res = await fetch('http://localhost:9999/auth', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'GET',
+      credentials: 'include'
+    });
+
+    if (res.status === 401) {
+      throw new Error('Unauthorized');
+    }
+
+    return res.json();
   }
 };
 

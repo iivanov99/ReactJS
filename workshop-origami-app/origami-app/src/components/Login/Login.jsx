@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import * as yup from 'yup';
 
 import userService from '../../services/user-service';
 import redirectWithNotification from '../../utils/redirect-with-notification';
 import handleErrors from '../../utils/handle-errors';
+import { UserContext } from '../ContextWrapper/ContextWrapper';
 
 import './Login.css';
 
@@ -17,23 +18,24 @@ const schema = yup.object().shape({
     .min(8, 'Password must be atleast 8 symbols!')
 });
 
-const Login = ({ setIsLogged, history }) => {
+const Login = ({ history }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { setUser } = useContext(UserContext);
 
   const handleFormSubmit = useCallback(async (ev) => {
     ev.preventDefault();
 
     try {
       await schema.validate({ username, password }, { abortEarly: false });
-      await userService.login({ username, password });
-      setIsLogged(true);
+      const user = await userService.login({ username, password });
+      setUser(user);
       redirectWithNotification(history, '/', 'Logged in successfully!');
     } catch (err) {
       handleErrors(err);
     }
-  }, [history, password, setIsLogged, username]);
+  }, [history, password, setUser, username]);
 
   return (
     <div className="Login">
