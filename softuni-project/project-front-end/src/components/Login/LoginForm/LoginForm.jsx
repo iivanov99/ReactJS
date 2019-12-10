@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import * as yup from 'yup';
 
+import { UserContext } from '../../ContextWrapper/ContextWrapper';
 import userService from '../../../services/user-service';
 import redirectWithNotification from '../../../utils/redirect-with-notification';
 import handleErrors from '../../../utils/handle-errors';
@@ -17,8 +18,9 @@ const schema = yup.object().shape({
     .max(12, 'Password must not exceed 12 symbols!')
 });
 
-const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
+const LoginForm = ({ history }) => {
 
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,13 +30,12 @@ const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
     try {
       await schema.validate({ email, password }, { abortEarly: false });
       const user = await userService.login({ email, password });
-      setIsLogged(true);
-      setIsAdmin(user.role === 'admin');
+      setUser(user);
       redirectWithNotification(history, '/', 'success', 'Logged in successfully!');
     } catch (err) {
       handleErrors(err);
     }
-  }, [email, history, password, setIsAdmin, setIsLogged]);
+  }, [email, history, password, setUser]);
 
   return (
     <div className="row row-dark-grey row-login">

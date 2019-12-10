@@ -5,7 +5,7 @@ import ApparelSectionHeading from './ApparelSectionHeading';
 
 import './ApparelSection.css';
 
-const ApparelSection = ({ apparelType, apparel, setApparel, history, isLogged, isAdmin }) => {
+const ApparelSection = ({ apparelType, apparel, history }) => {
 
   const [searchValue, setSearchValue] = useState('');
   const [apparelToDisplay, setApparelToDisplay] = useState(apparel);
@@ -27,8 +27,7 @@ const ApparelSection = ({ apparelType, apparel, setApparel, history, isLogged, i
         </div>
       </div>
       <ProductList apparel={apparelToDisplay} apparelType={apparelType}
-        isAdmin={isAdmin} isLogged={isLogged} history={history}
-        setApparel={setApparelToDisplay} forMainPage={false} />
+        history={history} setApparel={setApparelToDisplay} forMainPage={false} />
     </Fragment>
   );
 };

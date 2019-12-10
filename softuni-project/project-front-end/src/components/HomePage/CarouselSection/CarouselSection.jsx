@@ -1,15 +1,19 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 import CarouselJumbotron from '../CarouselJumbotron/CarouselJumbotron';
 
+import { UserContext } from '../../ContextWrapper/ContextWrapper';
 import carouselImg1 from '../../../images/car-img-1.jpg';
 import carouselImg2 from '../../../images/car-img-2.jpg';
 import carouselImg3 from '../../../images/car-img-3.jpg';
 
 import './CarouselSection.css';
 
-const CarouselSection = ({ isLogged }) => {
+const CarouselSection = () => {
+
+  const { isLogged } = useContext(UserContext);
+
   return (
     <Fragment>
       <CarouselJumbotron />

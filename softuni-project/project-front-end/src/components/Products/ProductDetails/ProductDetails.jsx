@@ -1,14 +1,17 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
+import React, { Fragment, useState, useEffect, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import apparelService from '../../../services/apparel-service';
 import cartService from '../../../services/cart-service';
 import redirectWithNotification from '../../../utils/redirect-with-notification';
+import { UserContext } from '../../ContextWrapper/ContextWrapper';
 
 import './ProductDetails.css';
 
-const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
+const ProductDetails = ({ match, history }) => {
+
+  const { isLogged, isAdmin } = useContext(UserContext);
 
   const apparelType = match.path.split('/')[2];
   const apparelId = match.params.id;

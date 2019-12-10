@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
@@ -9,17 +9,17 @@ import './PendingOrder.css';
 
 const PendingOrder = ({ _id, user, name, date, price, setPendingOrders }) => {
 
-  const handleAcceptClick = async () => {
+  const handleAcceptClick = useCallback(async () => {
     await orderService.changeStatus('Accepted', _id);
     setPendingOrders(await orderService.loadAll());
     toast.success(`${name} order accepted!`);
-  };
+  }, [_id, name, setPendingOrders]);
 
-  const handleDeclineClick = async () => {
+  const handleDeclineClick = useCallback(async () => {
     await orderService.changeStatus('Declined', _id);
     setPendingOrders(await orderService.loadAll());
     toast.error(`${name} order declined!`);
-  };
+  }, [_id, name, setPendingOrders]);
 
   return (
     <tr>

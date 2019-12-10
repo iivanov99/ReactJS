@@ -1,20 +1,22 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
 
+import { UserContext } from '../ContextWrapper/ContextWrapper';
 import userService from '../../services/user-service';
 import './Navigation.css';
 
 import { toast } from 'react-toastify';
 
-const Navigation = ({ isLogged, isAdmin, setIsLogged, setIsAdmin }) => {
+const Navigation = () => {
+
+  const { setUser, isLogged, isAdmin } = useContext(UserContext);
 
   const handleLogoutClick = useCallback(async () => {
     await userService.logout();
-    setIsLogged(false);
-    setIsAdmin(false);
+    setUser(null);
     toast.success('Logged out successfully!');
-  }, [setIsAdmin, setIsLogged]);
+  }, [setUser]);
 
   return (
     <Fragment>

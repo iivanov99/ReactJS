@@ -1,5 +1,11 @@
-p.status {
+.pending-order,
+.accepted-order,
+.declined-order {
   margin: 0;
+}
+
+.pending-order {
+  color: #FF5A09;;
 }
 
 .accepted-order {

@@ -10,7 +10,7 @@ const userService = {
 
     if (res.status === 422) {
       const parsedRes = await res.json();
-      
+
       if (parsedRes.msg.includes('email')) {
         throw new Error('Email is already taken');
       } else {
@@ -44,6 +44,21 @@ const userService = {
       method: 'POST',
       credentials: 'include'
     });
+
+    return res.json();
+  },
+  auth: async () => {
+    const res = await fetch('http://localhost:8080/api/user/auth', {
+      headers: {
+        'Content-Type': 'applicataion/json'
+      },
+      method: 'GET',
+      credentials: 'include'
+    });
+
+    if (res.status === 401) {
+      throw new Error('Unauthorized!');
+    }
 
     return res.json();
   }

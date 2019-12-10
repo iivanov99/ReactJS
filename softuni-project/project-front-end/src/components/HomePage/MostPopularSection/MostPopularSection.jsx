@@ -1,9 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
+
 import ApparelHeading from '../ApparelHeading/ApparelHeading';
 import ProductList from '../../Products/ProductList';
 import apparelService from '../../../services/apparel-service';
 
-const MostPopularSection = ({ isLogged, isAdmin, history }) => {
+const MostPopularSection = ({ history }) => {
 
   const [menApparel, setMenApparel] = useState([]);
   const [womenApparel, setWomenApparel] = useState([]);
@@ -32,15 +33,15 @@ const MostPopularSection = ({ isLogged, isAdmin, history }) => {
 
       <ApparelHeading name="Men Apparel" />
       <ProductList apparel={menApparel} apparelType="men" setApparel={setMenApparel}
-        isLogged={isLogged} isAdmin={isAdmin} history={history} forMainPage={true} />
+        history={history} forMainPage={true} />
 
       <ApparelHeading name="Women Apparel" />
       <ProductList apparel={womenApparel} apparelType="women" setApparel={setWomenApparel}
-        isLogged={isLogged} isAdmin={isAdmin} history={history} forMainPage={true} />
+        history={history} forMainPage={true} />
 
       <ApparelHeading name="Accessories" />
       <ProductList apparel={accessories} apparelType="accessories" setApparel={setAccessories}
-        isLogged={isLogged} isAdmin={isAdmin} history={history} forMainPage={true} />
+        history={history} forMainPage={true} />
     </Fragment>
   );
 };

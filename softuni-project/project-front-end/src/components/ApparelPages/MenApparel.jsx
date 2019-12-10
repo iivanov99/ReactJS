@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
+
 import ApparelSection from './ApparelSection/ApparelSection';
 import apparelService from '../../services/apparel-service';
 
-const MenApparel = ({ history, isLogged, isAdmin }) => {
+const MenApparel = ({ history }) => {
 
   const [menApparel, setMenApparel] = useState([]);
 
@@ -15,8 +16,7 @@ const MenApparel = ({ history, isLogged, isAdmin }) => {
   return (
     <Fragment>
       {menApparel.length ? (
-        <ApparelSection apparelType="men" apparel={menApparel} setApparel={setMenApparel}
-          history={history} isLogged={isLogged} isAdmin={isAdmin} />
+        <ApparelSection apparelType="men" apparel={menApparel} history={history} />
       ) : (
         <div className="loading-div"></div>
       )}

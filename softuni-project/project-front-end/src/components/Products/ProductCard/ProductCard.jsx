@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 import cartService from '../../../services/cart-service';
 import apparelService from '../../../services/apparel-service';
 import redirectWithNotification from '../../../utils/redirect-with-notification';
+import { UserContext } from '../../ContextWrapper/ContextWrapper'
 
 import './ProductCard.css';
 
-const ProductCard = ({ apparelType, product, isLogged, isAdmin, history, setApparel, forMainPage }) => {
+const ProductCard = ({ product, apparelType, history, setApparel, forMainPage }) => {
 
+  const { isLogged, isAdmin } = useContext(UserContext);
   const { _id, name, price, imageUrl, description } = product;
 
   const handleAddToCartClick = useCallback(async (ev) => {
