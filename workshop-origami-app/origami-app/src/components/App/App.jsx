@@ -27,20 +27,18 @@ const App = () => {
           <Navigation />
           <div className="Container">
             <Aside />
-            <Switch>
-              <UserContext.Consumer>
-                {({ isLogged }) => (
-                  <Fragment>
-                    <Route path="/" exact component={Main} />
-                    {!isLogged ? (<Route path="/user/register" component={Register} />) : null}
-                    {!isLogged ? (<Route path="/user/login" component={Login} />) : null}
-                    {isLogged ? (<Route path="/posts/create" component={CreatePost} />) : null}
-                    {isLogged ? (<Route path="/user/profile" component={Profile} />) : null}
-                    <Route component={PageNotFound} />
-                  </Fragment>
-                )}
-              </UserContext.Consumer>
-            </Switch>
+            <UserContext.Consumer>
+              {({ isLogged }) => (
+                <Switch>
+                  <Route path="/" exact component={Main} />
+                  {!isLogged ? (<Route path="/user/register" component={Register} />) : null}
+                  {!isLogged ? (<Route path="/user/login" component={Login} />) : null}
+                  {isLogged ? (<Route path="/posts/create" component={CreatePost} />) : null}
+                  {isLogged ? (<Route path="/user/profile" component={Profile} />) : null}
+                  <Route component={PageNotFound} />
+                </Switch>
+              )}
+            </UserContext.Consumer>
           </div>
           <Footer />
         </div>
