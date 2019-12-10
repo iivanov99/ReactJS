@@ -1,5 +1,16 @@
+.loading-txt {
+  color: white;
+}
+
 .navbar-dark {
   background-color: #0c0c0e !important;
+}
+
+.nav-item p {
+  color: #ec7f37;
+  font-size: 16px;
+  display: block;
+  padding: .5rem 1rem;
 }
 
 .navbar-dark .navbar-nav .nav-link {

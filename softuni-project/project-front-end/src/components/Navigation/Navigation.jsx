@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 const Navigation = () => {
 
-  const { setUser, isLogged, isAdmin } = useContext(UserContext);
+  const { user, setUser, isLogged, isAdmin } = useContext(UserContext);
 
   const handleLogoutClick = useCallback(async () => {
     await userService.logout();
@@ -42,7 +42,9 @@ const Navigation = () => {
           {!isLogged ? (<Link className="nav-link" to="/user/login">Login</Link>) : null}
           {!isLogged ? (<Link className="nav-link" to="/user/register">Register</Link>) : null}
 
-          {isLogged ? (<Link className="nav-link" to="/user/profile">Profile</Link>) : null}
+          {isLogged && user ? (<li className="nav-item">
+            <p className="float-right mb-0" href="">Hello, {user.username}!</p>
+          </li>) : null}
           {isLogged ? (<Link onClick={handleLogoutClick} className="nav-link" to="">Logout</Link>) : null}
         </Nav>
       </Navbar>

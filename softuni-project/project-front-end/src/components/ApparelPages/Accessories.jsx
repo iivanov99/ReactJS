@@ -15,7 +15,8 @@ const Accessories = ({ history }) => {
   return (
     <Fragment>
       {accessories.length ? (
-        <ApparelSection apparelType="accessories" apparel={accessories} history={history} />
+        <ApparelSection apparelType="accessories" apparel={accessories}
+          setApparel={setAccessories} history={history} />
       ) : (
         <div className="loading-div"></div>
       )}

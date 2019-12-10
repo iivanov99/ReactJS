@@ -1,14 +1,18 @@
-import React, { Fragment, useState, useCallback } from 'react';
+import React, { Fragment, useState, useCallback, useEffect } from 'react';
 
 import ProductList from '../../Products/ProductList';
 import ApparelSectionHeading from './ApparelSectionHeading';
 
 import './ApparelSection.css';
 
-const ApparelSection = ({ apparelType, apparel, history }) => {
+const ApparelSection = ({ apparelType, apparel, history, setApparel }) => {
 
   const [searchValue, setSearchValue] = useState('');
   const [apparelToDisplay, setApparelToDisplay] = useState(apparel);
+
+  useEffect(() => {
+    setApparelToDisplay(apparel);
+  }, [apparel]);
 
   const handleSearchInputChange = useCallback(ev => {
     const searchedApparel = apparel.filter(apparelItem =>
@@ -27,7 +31,7 @@ const ApparelSection = ({ apparelType, apparel, history }) => {
         </div>
       </div>
       <ProductList apparel={apparelToDisplay} apparelType={apparelType}
-        history={history} setApparel={setApparelToDisplay} forMainPage={false} />
+        history={history} setApparel={setApparel} forMainPage={false} />
     </Fragment>
   );
 };
