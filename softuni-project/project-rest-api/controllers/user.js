@@ -66,7 +66,6 @@ module.exports = {
         const accessToken = await utils.jwt.createToken({ id: user._id });
         res
           .cookie(config.authCookieName, accessToken)
-          .cookie('role', user.role)
           .json({ _id: user._id, username: user.username, role: user.role });
       } catch (err) {
         next(err);
@@ -75,7 +74,6 @@ module.exports = {
     logout: async (req, res, next) => {
       res
         .clearCookie(config.authCookieName)
-        .clearCookie('role')
         .send({ msg: 'Logged out successfully!' });
     }
   },
