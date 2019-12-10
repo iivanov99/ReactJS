@@ -4,6 +4,8 @@ const { auth } = require('../utils');
 
 router.get('/', auth.forbidGuests, controllers.user.get.all);
 
+router.get('/auth', controllers.user.get.isAuth);
+
 router.get('/:id', auth.forbidGuests, controllers.user.get.one);
 
 router.post('/register', controllers.user.post.register);

@@ -19,6 +19,16 @@ module.exports = {
       } catch (err) {
         next(err);
       }
+    },
+    isAuth: async (req, res) => {
+      try {
+        const authToken = req.cookies[config.authCookieName];
+        const { id } = await utils.jwt.verifyToken(authToken);
+        const user = await models.User.findOne({ _id: id }).select('-password');
+        res.json(user);
+      } catch (err) {
+        res.status(401).send({ msg: 'Unauthorized!' });
+      }
     }
   },
   post: {
