@@ -11,7 +11,7 @@ const CartItem = ({ _id, item, price, date, setCartItems }) => {
   const handleRemoveClick = useCallback(async () => {
     await cartService.deleteFromCart(_id);
     setCartItems(await cartService.loadAll());
-    toast.success(`${item} removed from the cart`);
+    toast.error(`${item} removed from the cart`);
   }, [_id, item, setCartItems]);
 
   return (

@@ -1,8 +1,10 @@
 import React, { Fragment, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
+
 import userService from '../../services/user-service';
 import './Navigation.css';
+
 import { toast } from 'react-toastify';
 
 const Navigation = ({ isLogged, isAdmin, setIsLogged, setIsAdmin }) => {
@@ -11,8 +13,7 @@ const Navigation = ({ isLogged, isAdmin, setIsLogged, setIsAdmin }) => {
     await userService.logout();
     setIsLogged(false);
     setIsAdmin(false);
-    toast.dismiss();
-    toast.success('Logged out successfuly!');
+    toast.success('Logged out successfully!');
   }, [setIsAdmin, setIsLogged]);
 
   return (

@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 import apparelService from '../../../services/apparel-service';
+import redirectWithNotification from '../../../utils/redirect-with-notification';
+import handleErrors from '../../../utils/handle-errors';
 
 import './CreateForm.css';
 
@@ -39,16 +40,9 @@ const CreateForm = ({ formName, categoryOptions, history }) => {
     try {
       await schema.validate({ name, description, imageUrl, category, price: +price }, { abortEarly: false });
       await apparelService.create(formName, { name, description, imageUrl, category, price, size });
-      history.push(`/apparel/${formName.toLowerCase()}`);
-      toast.dismiss();
-      toast.success(`${name} successfuly created!`);
+      redirectWithNotification(history, `/apparel/${formName.toLowerCase()}`, 'success', `${name} successfuly created!`);
     } catch (err) {
-      toast.dismiss();
-
-      if (err.inner) {
-        err.inner.forEach(innerErr => toast.error(innerErr.message));
-        return;
-      }
+      handleErrors(err);
     }
   }
 

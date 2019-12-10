@@ -1,7 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import { toast } from 'react-toastify';
 import * as yup from 'yup';
+
 import userService from '../../../services/user-service';
+import redirectWithNotification from '../../../utils/redirect-with-notification';
+import handleErrors from '../../../utils/handle-errors';
+
 import './LoginForm.css';
 
 const schema = yup.object().shape({
@@ -27,20 +30,9 @@ const LoginForm = ({ history, setIsLogged, setIsAdmin }) => {
       const user = await userService.login({ email, password });
       setIsLogged(true);
       setIsAdmin(user.role === 'admin');
-      history.push('/');
-      toast.dismiss();
-      toast.success('Logged in successfuly!');
+      redirectWithNotification(history, '/', 'success', 'Logged in successfully!');
     } catch (err) {
-      toast.dismiss();
-
-      if (err.inner) {
-        err.inner.forEach(innerErr => toast.error(innerErr.message));
-        return;
-      }
-
-      if (err.message === 'Unauthorized') {
-        toast.error('Invalid email or password!');
-      }
+      handleErrors(err);
     }
   }, [email, history, password, setIsAdmin, setIsLogged]);
 

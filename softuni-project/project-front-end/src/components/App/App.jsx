@@ -19,19 +19,13 @@ import CreateWomens from '../CreatePages/CreateWomens';
 import CreateAccessories from '../CreatePages/CreateAccessories';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import EditApparel from '../EditApparel/EditApparel';
+import parseCookies from '../../utils/parse-cookies';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 toast.configure();
 
-const parseCookies = () => {
-  return document.cookie.split('; ').reduce((acc, cookie) => {
-    const [cookieName, cookieValue] = cookie.split('=');
-    acc[cookieName] = cookieValue;
-    return acc;
-  }, {});
-};
 
 const App = () => {
 

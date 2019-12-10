@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import apparelService from '../../../services/apparel-service';
 import cartService from '../../../services/cart-service';
+import redirectWithNotification from '../../../utils/redirect-with-notification';
 
 import './ProductDetails.css';
 
@@ -23,7 +24,7 @@ const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
     ev.preventDefault();
     await cartService.addToCart({ name: product.name, price: product.price });
     history.push('/user/cart');
-    toast.success('Item successfully added to your cart!');
+    toast.success(`${product.name} successfully added to your cart!`);
   }, [history, product.name, product.price]);
 
   const handleDeleteClick = useCallback(async (ev) => {
@@ -31,9 +32,7 @@ const ProductDetails = ({ match, history, isLogged, isAdmin }) => {
     const apparelType = match.path.split('/')[2];
     const apparelId = match.params.id;
     await apparelService.delete(apparelType, apparelId);
-    history.push(`/apparel/${apparelType}`);
-    toast.dismiss();
-    toast.success(`${product.name} deleted successfuly!`);
+    redirectWithNotification(history, `/apparel/${apparelType}`, 'error', `${product.name} removed from the shop!`);
   }, [history, match.params.id, match.path, product.name]);
 
   if (!Object.keys(product).length) {
