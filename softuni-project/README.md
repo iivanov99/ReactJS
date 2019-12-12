@@ -5,9 +5,9 @@ The application has three levels of accessibility: guest user, registered user a
 
 The guest user can only browse through the different types and models of apparel, but is not authenticated to see or use the add to cart or checkout functionalities.
 
-The already logged in user is authenticated to not only see the different apparel, but also to see and use "My Orders" & "Cart" pages. The user is authorized to perform actions such as adding items to his corresponding cart and making an order with the items in it throught the "Checkout" button in the "Cart" page. The items then go to the "My Orders" page where information about every order is displayed.
+The already logged in user is authenticated to not only see the different apparel, but also to see and use "My Orders" & "Cart" pages. The user is authorized to perform actions such as adding items to his corresponding cart and making an order with the items in it through the "Checkout" button in the "Cart" page. The items then go to the "My Orders" page where information about every order is displayed.
 
-The administrator of the application is only one. He has full access to the system and is authorized to perform actions such as acceptding/declining users' orders through the "Pending Orders" page, editing & deleting whatever apparel he wants throught the corresponding buttons on the apparel cards and also create new apparel throught the "Add New" dropdown pages ("Men", "Women", "Accessories").
+The administrator of the application is only one. He has full access to the system and is authorized to perform actions such as accepting/declining users' orders through the "Pending Orders" page, editing & deleting whatever apparel he wants through the corresponding buttons on the apparel cards and also create new apparel through the "Add New" dropdown pages ("Men", "Women", "Accessories").
 
 ## Application Dependancies
 When the project is downloaded or cloned open the terminal in both project-rest-api & project-front-end folders and type the following command: 
