@@ -3,7 +3,7 @@ ForeverLean is a single page ecommerce application build entirely on the latest 
 
 The application has three levels of accessibility: guest user, registered user and administator.
 
-The guest user can only browse through the different types and models of apparel, but is not authenticated to see or use ther add to cart or checkout functionalities.
+The guest user can only browse through the different types and models of apparel, but is not authenticated to see or use the add to cart or checkout functionalities.
 
 The already logged in user is authenticated to not only see the different apparel, but also to see and use "My Orders" & "Cart" pages. The user is authorized to perform actions such as adding items to his corresponding cart and making an order with the items in it throught the "Checkout" button in the "Cart" page. The items then go to the "My Orders" page where information about every order is displayed.
 
